@@ -7,20 +7,14 @@ import java.util.ArrayList;
  */
 public class Cell {
 
-    private int cellID;
     private Vertex centre;
     private ArrayList<Vertex> vertices;
     private ArrayList<Integer> neighbours;
 
-    public Cell(int cellID, Vertex centre, ArrayList<Vertex> vertices, ArrayList<Integer> neighbours){
-        this.cellID = cellID;
+    public Cell(Vertex centre){
         this.centre = centre;
-        this.vertices = vertices;
-        this.neighbours = neighbours;
-    }
-
-    public int getCellID() {
-        return cellID;
+        this.vertices = new ArrayList<Vertex>();
+        this.neighbours = new ArrayList<Integer>();
     }
 
     public Vertex getCentre() {

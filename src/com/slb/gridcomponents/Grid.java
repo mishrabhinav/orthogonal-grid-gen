@@ -1,6 +1,5 @@
 package com.slb.gridcomponents;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -10,8 +9,8 @@ public class Grid {
 
     private HashMap<Integer, Cell> cells;
 
-    public Grid(HashMap<Integer, Cell> cells) {
-        this.cells = cells;
+    public Grid() {
+        this.cells = new HashMap<Integer, Cell>();
     }
 
     public HashMap<Integer, Cell> getCells() {

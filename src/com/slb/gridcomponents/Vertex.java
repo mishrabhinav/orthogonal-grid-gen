@@ -5,9 +5,9 @@ package com.slb.gridcomponents;
  */
 public class Vertex {
 
-    private double x;
-    private double y;
-    private double z;
+    public double x;
+    public double y;
+    public double z;
 
     public Vertex(double x, double y, double z) {
         this.x = x;
@@ -15,15 +15,4 @@ public class Vertex {
         this.z = z;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
-    }
 }
