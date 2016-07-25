@@ -156,11 +156,31 @@ public class Utils {
     public Vector directSearch(Cell cell) {
 
         double step = INITIAL_STEP;
+        Vector bestPosition = cell.getCentre();
+        Vector currentPosition = cell.getCentre();
 
         while (step > INITIAL_STEP/8) {
-
+            double currentBest = calculateAverageAngles(cell);
             Vector[] positions = probablePositions(cell.getCentre(), step);
+
+            for(Vector v : positions) {
+                cell.setCentre(v);
+                double probableBest = calculateAverageAngles(cell);
+
+                if (probableBest < currentBest) {
+                    currentPosition = v;
+                    currentBest = probableBest;
+                }
+            }
+
+            if(bestPosition.equals(currentPosition)) {
+                step /= 2;
+            } else if (insideCell(cell, currentPosition)) {
+                bestPosition = currentPosition;
+            }
         }
+
+        cell.setCentre(bestPosition);
 
         return cell.getCentre();
     }
