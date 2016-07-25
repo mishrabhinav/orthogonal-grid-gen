@@ -1,4 +1,4 @@
-package com.slb.gridloader;
+package com.slb.utils;
 
 import com.slb.gridcomponents.Cell;
 import com.slb.gridcomponents.Grid;
@@ -10,12 +10,12 @@ import java.util.HashMap;
 /**
  * Created by AMishra12 on 22/07/2016.
  */
-public class GridLoader {
+public class GridUtils {
 
     private String input;
     private Grid grid;
 
-    public GridLoader(String input) {
+    public GridUtils(String input) {
         this.input = input;
         this.grid = new Grid();
     }

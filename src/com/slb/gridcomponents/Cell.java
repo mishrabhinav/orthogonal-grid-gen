@@ -33,4 +33,59 @@ public class Cell {
         return neighbours;
     }
 
+    public Vertex[] getFace(int faceNum) {
+
+        // NOTE: Face and Vertex ordering is different in Intersect.
+
+        Vertex[] vertices = new Vertex[4];
+
+        switch (faceNum) {
+            case 0:
+                vertices[0] = this.vertices.get(0);
+                vertices[1] = this.vertices.get(1);
+                vertices[2] = this.vertices.get(2);
+                vertices[3] = this.vertices.get(3);
+                break;
+
+            case 1:
+                vertices[0] = this.vertices.get(4);
+                vertices[1] = this.vertices.get(5);
+                vertices[2] = this.vertices.get(6);
+                vertices[3] = this.vertices.get(7);
+                break;
+
+            case 2:
+                vertices[0] = this.vertices.get(3);
+                vertices[1] = this.vertices.get(2);
+                vertices[2] = this.vertices.get(6);
+                vertices[3] = this.vertices.get(7);
+                break;
+
+            case 3:
+                vertices[0] = this.vertices.get(0);
+                vertices[1] = this.vertices.get(1);
+                vertices[2] = this.vertices.get(5);
+                vertices[3] = this.vertices.get(4);
+                break;
+
+            case 4:
+                vertices[0] = this.vertices.get(0);
+                vertices[1] = this.vertices.get(3);
+                vertices[2] = this.vertices.get(7);
+                vertices[3] = this.vertices.get(4);
+                break;
+
+            case 5:
+                vertices[0] = this.vertices.get(1);
+                vertices[1] = this.vertices.get(2);
+                vertices[2] = this.vertices.get(6);
+                vertices[3] = this.vertices.get(5);
+                break;
+
+            default:
+                System.out.println("Face number should be in range 0-5.");
+        }
+
+        return vertices;
+    }
 }

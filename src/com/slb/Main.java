@@ -1,13 +1,13 @@
 package com.slb;
 
 import com.slb.gridcomponents.Grid;
-import com.slb.gridloader.GridLoader;
+import com.slb.utils.GridUtils;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        GridLoader loader = new GridLoader(args[0]);
+        GridUtils loader = new GridUtils(args[0]);
         Grid grid = loader.loadGrid();
     }
 }
