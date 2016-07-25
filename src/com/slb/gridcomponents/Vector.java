@@ -15,36 +15,61 @@ public class Vector {
         this.z = z;
     }
 
-    public void add(Vector b) {
-        add(b.x, b.y, b.z);
+    @Override
+    public Vector clone() {
+        return new Vector(this.x, this.y, this.z);
     }
 
-    public void add(double scalarx, double scalary, double scalarz) {
+    public double magnitude() {
+        return Math.sqrt(x*x + y*y + z*z);
+    }
+
+    public Vector add(Vector b) {
+        return add(b.x, b.y, b.z);
+    }
+
+    public Vector add(double scalarx, double scalary, double scalarz) {
         this.x += scalarx;
         this.y += scalary;
         this.z += scalarz;
+
+        return this;
     }
 
-    public void subtract(Vector b) {
-        subtract(b.x, b.y, b.z);
+    public Vector subtract(Vector b) {
+        return subtract(b.x, b.y, b.z);
     }
 
-    public void subtract(double scalarx, double scalary, double scalarz) {
+    public Vector subtract(double scalarx, double scalary, double scalarz) {
         this.x -= scalarx;
         this.y -= scalary;
         this.z -= scalarz;
+
+        return this;
     }
 
-    public void multiply(double scalarx, double scalary, double scalarz) {
+    public Vector multiply(double scalarx, double scalary, double scalarz) {
         this.x *= scalarx;
         this.y *= scalary;
         this.z *= scalarz;
+
+        return this;
     }
 
-    public void divide(double scalarx, double scalary, double scalarz) {
+    public Vector divide(double scalarx, double scalary, double scalarz) {
         this.x /= scalarx;
         this.y /= scalary;
         this.z /= scalarz;
+
+        return this;
+    }
+
+    public double dot(Vector B) {
+        return this.x * B.x + this.y * B.y + this.z * B.z;
+    }
+
+    public Vector cross(Vector B) {
+        return new Vector(this.y * B.z - this.z * B.y, this.z * B.x - this.x * B.z, this.x * B.y - this.y * B.x);
     }
 
 }

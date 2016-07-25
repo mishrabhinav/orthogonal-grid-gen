@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public class Cell {
 
     private Vector centre;
+    public Vector pointInside;
     private ArrayList<Vector> vertices;
     private ArrayList<Integer> neighbours;
 
     public Cell(Vector centre){
         this.centre = centre;
+        this.pointInside = new Vector(centre.x, centre.y, centre.z);
         this.vertices = new ArrayList<Vector>();
         this.neighbours = new ArrayList<Integer>();
     }
@@ -31,6 +33,15 @@ public class Cell {
 
     public ArrayList<Integer> getNeighbours() {
         return neighbours;
+    }
+
+    public int getValidNeighbours() {
+        int valid = 0;
+
+        for(int n : neighbours)
+            valid += n != -1 ? 1 : 0;
+
+        return valid;
     }
 
     public Vector[] getFace(int faceNum) {

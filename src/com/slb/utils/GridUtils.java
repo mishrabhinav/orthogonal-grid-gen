@@ -14,6 +14,7 @@ public class GridUtils {
 
     private String input;
     private Grid grid;
+    public Utils utils;
 
     public GridUtils(String input) {
         this.input = input;
@@ -25,10 +26,14 @@ public class GridUtils {
      * Follow the ordering Sheleem mentioned.
      */
     public Grid loadGrid() {
-        return loadMockData();
+
+        loadMockData();
+        utils = new Utils(grid);
+
+        return grid;
     }
 
-    private Grid loadMockData() {
+    private void loadMockData() {
 
         HashMap<Integer, Cell> cells = grid.getCells();
 
@@ -228,6 +233,5 @@ public class GridUtils {
 
         cells.put(7, cell);
 
-        return grid;
     }
 }
