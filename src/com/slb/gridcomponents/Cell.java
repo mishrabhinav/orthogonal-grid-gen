@@ -7,25 +7,25 @@ import java.util.ArrayList;
  */
 public class Cell {
 
-    private Vertex centre;
-    private ArrayList<Vertex> vertices;
+    private Vector centre;
+    private ArrayList<Vector> vertices;
     private ArrayList<Integer> neighbours;
 
-    public Cell(Vertex centre){
+    public Cell(Vector centre){
         this.centre = centre;
-        this.vertices = new ArrayList<Vertex>();
+        this.vertices = new ArrayList<Vector>();
         this.neighbours = new ArrayList<Integer>();
     }
 
-    public Vertex getCentre() {
+    public Vector getCentre() {
         return centre;
     }
 
-    public void setCentre(Vertex centre) {
+    public void setCentre(Vector centre) {
         this.centre = centre;
     }
 
-    public ArrayList<Vertex> getVertices() {
+    public ArrayList<Vector> getVertices() {
         return vertices;
     }
 
@@ -33,11 +33,11 @@ public class Cell {
         return neighbours;
     }
 
-    public Vertex[] getFace(int faceNum) {
+    public Vector[] getFace(int faceNum) {
 
-        // NOTE: Face and Vertex ordering is different in Intersect.
+        // NOTE: Face and Vector ordering is different in Intersect.
 
-        Vertex[] vertices = new Vertex[4];
+        Vector[] vertices = new Vector[4];
 
         switch (faceNum) {
             case 0:

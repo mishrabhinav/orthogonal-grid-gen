@@ -3,19 +3,19 @@ package com.slb.gridcomponents;
 /**
  * Created by AMishra12 on 22/07/2016.
  */
-public class Vertex {
+public class Vector {
 
     public double x;
     public double y;
     public double z;
 
-    public Vertex(double x, double y, double z) {
+    public Vector(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public void add(Vertex b) {
+    public void add(Vector b) {
         add(b.x, b.y, b.z);
     }
 
@@ -25,7 +25,7 @@ public class Vertex {
         this.z += scalarz;
     }
 
-    public void subtract(Vertex b) {
+    public void subtract(Vector b) {
         subtract(b.x, b.y, b.z);
     }
 

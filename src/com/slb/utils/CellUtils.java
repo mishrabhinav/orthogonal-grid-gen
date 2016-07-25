@@ -1,18 +1,18 @@
 package com.slb.utils;
 
 import com.slb.gridcomponents.Cell;
-import com.slb.gridcomponents.Vertex;
+import com.slb.gridcomponents.Vector;
 
 /**
  * Created by AMishra12 on 25/07/2016.
  */
 public class CellUtils {
 
-    public Vertex getBarycenter(Cell cell) {
+    public Vector getBarycenter(Cell cell) {
 
-        Vertex barycenter = new Vertex(0, 0, 0);
+        Vector barycenter = new Vector(0, 0, 0);
 
-        for (Vertex v : cell.getVertices())
+        for (Vector v : cell.getVertices())
             barycenter.add(v);
 
         double numVertices = cell.getVertices().size();
@@ -21,12 +21,12 @@ public class CellUtils {
         return barycenter;
     }
 
-    public Vertex getFaceCenter(Cell cell, int faceNum) {
+    public Vector getFaceCenter(Cell cell, int faceNum) {
 
-        Vertex[] faceVertices = cell.getFace(faceNum);
-        Vertex faceCenter = new Vertex(0, 0, 0);
+        Vector[] faceVertices = cell.getFace(faceNum);
+        Vector faceCenter = new Vector(0, 0, 0);
 
-        for (Vertex v : faceVertices)
+        for (Vector v : faceVertices)
             faceCenter.add(v);
 
         double numVertices = faceVertices.length;
@@ -35,11 +35,11 @@ public class CellUtils {
         return faceCenter;
     }
 
-    public double valueWithPlane(Vertex a, Vertex b, Vertex c, Vertex d) {
+    public double valueWithPlane(Vector a, Vector b, Vector c, Vector d) {
 
-        Vertex B = new Vertex(b.x - a.x, b.y - a.y, b.z - a.z);
-        Vertex C = new Vertex(c.x - a.x, c.y - a.y, c.z - a.z);
-        Vertex D = new Vertex(d.x - a.x, d.y - a.y, d.z - a.z);
+        Vector B = new Vector(b.x - a.x, b.y - a.y, b.z - a.z);
+        Vector C = new Vector(c.x - a.x, c.y - a.y, c.z - a.z);
+        Vector D = new Vector(d.x - a.x, d.y - a.y, d.z - a.z);
 
         double volume = B.x * (C.y * D.z - D.y * C.z)
                 - B.y * (C.x * D.z - D.x * C.z)
@@ -48,9 +48,9 @@ public class CellUtils {
         return volume;
     }
 
-    public boolean arePointsOnSameSide(Cell cell, int facenum, Vertex a, Vertex b) {
+    public boolean arePointsOnSameSide(Cell cell, int facenum, Vector a, Vector b) {
 
-        Vertex[] faceVertices = cell.getFace(facenum);
+        Vector[] faceVertices = cell.getFace(facenum);
 
         double val_a = valueWithPlane(faceVertices[0], faceVertices[1], faceVertices[2], a);
         double val_b = valueWithPlane(faceVertices[0], faceVertices[1], faceVertices[2], b);

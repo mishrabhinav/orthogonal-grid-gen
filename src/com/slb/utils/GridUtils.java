@@ -2,7 +2,7 @@ package com.slb.utils;
 
 import com.slb.gridcomponents.Cell;
 import com.slb.gridcomponents.Grid;
-import com.slb.gridcomponents.Vertex;
+import com.slb.gridcomponents.Vector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,21 +32,21 @@ public class GridUtils {
 
         HashMap<Integer, Cell> cells = grid.getCells();
 
-        Vertex v0, v1, v2, v3, v4, v5, v6, v7;
+        Vector v0, v1, v2, v3, v4, v5, v6, v7;
         Cell cell;
-        ArrayList<Vertex> vertices;
+        ArrayList<Vector> vertices;
 
         // Cell 0
-        cell = new Cell(new Vertex(0.5, 0.5, 0.5));
+        cell = new Cell(new Vector(0.5, 0.5, 0.5));
 
-        v0 = new Vertex(0,1,1);
-        v1 = new Vertex(0,0,1);
-        v2 = new Vertex(1,0,1);
-        v3 = new Vertex(1,1,1);
-        v4 = new Vertex(0,1,0);
-        v5 = new Vertex(0,0,0);
-        v6 = new Vertex(1,0,0);
-        v7 = new Vertex(1,1,0);
+        v0 = new Vector(0,1,1);
+        v1 = new Vector(0,0,1);
+        v2 = new Vector(1,0,1);
+        v3 = new Vector(1,1,1);
+        v4 = new Vector(0,1,0);
+        v5 = new Vector(0,0,0);
+        v6 = new Vector(1,0,0);
+        v7 = new Vector(1,1,0);
 
         vertices = cell.getVertices();
         vertices.add(v0);
@@ -61,16 +61,16 @@ public class GridUtils {
         cells.put(0, cell);
 
         // Cell 1
-        cell = new Cell(new Vertex(0.5, 0.5, 0.5));
+        cell = new Cell(new Vector(0.5, 0.5, 0.5));
 
-        v0 = new Vertex(0,1,1);
-        v1 = new Vertex(0,0,1);
-        v2 = new Vertex(1,0,1);
-        v3 = new Vertex(1,1,1);
-        v4 = new Vertex(0,1,0);
-        v5 = new Vertex(0,0,0);
-        v6 = new Vertex(1,0,0);
-        v7 = new Vertex(1,1,0);
+        v0 = new Vector(0,1,1);
+        v1 = new Vector(0,0,1);
+        v2 = new Vector(1,0,1);
+        v3 = new Vector(1,1,1);
+        v4 = new Vector(0,1,0);
+        v5 = new Vector(0,0,0);
+        v6 = new Vector(1,0,0);
+        v7 = new Vector(1,1,0);
 
         vertices = cell.getVertices();
         vertices.add(v0);
@@ -85,16 +85,16 @@ public class GridUtils {
         cells.put(1, cell);
 
         // Cell 2
-        cell = new Cell(new Vertex(0.5, 0.5, 0.5));
+        cell = new Cell(new Vector(0.5, 0.5, 0.5));
 
-        v0 = new Vertex(0,1,1);
-        v1 = new Vertex(0,0,1);
-        v2 = new Vertex(1,0,1);
-        v3 = new Vertex(1,1,1);
-        v4 = new Vertex(0,1,0);
-        v5 = new Vertex(0,0,0);
-        v6 = new Vertex(1,0,0);
-        v7 = new Vertex(1,1,0);
+        v0 = new Vector(0,1,1);
+        v1 = new Vector(0,0,1);
+        v2 = new Vector(1,0,1);
+        v3 = new Vector(1,1,1);
+        v4 = new Vector(0,1,0);
+        v5 = new Vector(0,0,0);
+        v6 = new Vector(1,0,0);
+        v7 = new Vector(1,1,0);
 
         vertices = cell.getVertices();
         vertices.add(v0);
@@ -109,16 +109,16 @@ public class GridUtils {
         cells.put(2, cell);
 
         // Cell 3
-        cell = new Cell(new Vertex(0.5, 0.5, 0.5));
+        cell = new Cell(new Vector(0.5, 0.5, 0.5));
 
-        v0 = new Vertex(0,1,1);
-        v1 = new Vertex(0,0,1);
-        v2 = new Vertex(1,0,1);
-        v3 = new Vertex(1,1,1);
-        v4 = new Vertex(0,1,0);
-        v5 = new Vertex(0,0,0);
-        v6 = new Vertex(1,0,0);
-        v7 = new Vertex(1,1,0);
+        v0 = new Vector(0,1,1);
+        v1 = new Vector(0,0,1);
+        v2 = new Vector(1,0,1);
+        v3 = new Vector(1,1,1);
+        v4 = new Vector(0,1,0);
+        v5 = new Vector(0,0,0);
+        v6 = new Vector(1,0,0);
+        v7 = new Vector(1,1,0);
 
         vertices = cell.getVertices();
         vertices.add(v0);
@@ -133,16 +133,16 @@ public class GridUtils {
         cells.put(3, cell);
 
         // Cell 4
-        cell = new Cell(new Vertex(0.5, 0.5, 0.5));
+        cell = new Cell(new Vector(0.5, 0.5, 0.5));
 
-        v0 = new Vertex(0,1,1);
-        v1 = new Vertex(0,0,1);
-        v2 = new Vertex(1,0,1);
-        v3 = new Vertex(1,1,1);
-        v4 = new Vertex(0,1,0);
-        v5 = new Vertex(0,0,0);
-        v6 = new Vertex(1,0,0);
-        v7 = new Vertex(1,1,0);
+        v0 = new Vector(0,1,1);
+        v1 = new Vector(0,0,1);
+        v2 = new Vector(1,0,1);
+        v3 = new Vector(1,1,1);
+        v4 = new Vector(0,1,0);
+        v5 = new Vector(0,0,0);
+        v6 = new Vector(1,0,0);
+        v7 = new Vector(1,1,0);
 
         vertices = cell.getVertices();
         vertices.add(v0);
@@ -157,16 +157,16 @@ public class GridUtils {
         cells.put(4, cell);
 
         // Cell 5
-        cell = new Cell(new Vertex(0.5, 0.5, 0.5));
+        cell = new Cell(new Vector(0.5, 0.5, 0.5));
 
-        v0 = new Vertex(0,1,1);
-        v1 = new Vertex(0,0,1);
-        v2 = new Vertex(1,0,1);
-        v3 = new Vertex(1,1,1);
-        v4 = new Vertex(0,1,0);
-        v5 = new Vertex(0,0,0);
-        v6 = new Vertex(1,0,0);
-        v7 = new Vertex(1,1,0);
+        v0 = new Vector(0,1,1);
+        v1 = new Vector(0,0,1);
+        v2 = new Vector(1,0,1);
+        v3 = new Vector(1,1,1);
+        v4 = new Vector(0,1,0);
+        v5 = new Vector(0,0,0);
+        v6 = new Vector(1,0,0);
+        v7 = new Vector(1,1,0);
 
         vertices = cell.getVertices();
         vertices.add(v0);
@@ -181,16 +181,16 @@ public class GridUtils {
         cells.put(5, cell);
 
         // Cell 6
-        cell = new Cell(new Vertex(0.5, 0.5, 0.5));
+        cell = new Cell(new Vector(0.5, 0.5, 0.5));
 
-        v0 = new Vertex(0,1,1);
-        v1 = new Vertex(0,0,1);
-        v2 = new Vertex(1,0,1);
-        v3 = new Vertex(1,1,1);
-        v4 = new Vertex(0,1,0);
-        v5 = new Vertex(0,0,0);
-        v6 = new Vertex(1,0,0);
-        v7 = new Vertex(1,1,0);
+        v0 = new Vector(0,1,1);
+        v1 = new Vector(0,0,1);
+        v2 = new Vector(1,0,1);
+        v3 = new Vector(1,1,1);
+        v4 = new Vector(0,1,0);
+        v5 = new Vector(0,0,0);
+        v6 = new Vector(1,0,0);
+        v7 = new Vector(1,1,0);
 
         vertices = cell.getVertices();
         vertices.add(v0);
@@ -205,16 +205,16 @@ public class GridUtils {
         cells.put(6, cell);
 
         // Cell 7
-        cell = new Cell(new Vertex(0.5, 0.5, 0.5));
+        cell = new Cell(new Vector(0.5, 0.5, 0.5));
 
-        v0 = new Vertex(0,1,1);
-        v1 = new Vertex(0,0,1);
-        v2 = new Vertex(1,0,1);
-        v3 = new Vertex(1,1,1);
-        v4 = new Vertex(0,1,0);
-        v5 = new Vertex(0,0,0);
-        v6 = new Vertex(1,0,0);
-        v7 = new Vertex(1,1,0);
+        v0 = new Vector(0,1,1);
+        v1 = new Vector(0,0,1);
+        v2 = new Vector(1,0,1);
+        v3 = new Vector(1,1,1);
+        v4 = new Vector(0,1,0);
+        v5 = new Vector(0,0,0);
+        v6 = new Vector(1,0,0);
+        v7 = new Vector(1,1,0);
 
         vertices = cell.getVertices();
         vertices.add(v0);
