@@ -98,7 +98,11 @@ public class Utils {
                     vertices[1].y - vertices[0].y,
                     vertices[1].z - vertices[0].z);
 
-        Vector result = A.cross(B);
+        Vector result = faceNum % 2 == 0 ? A.cross(B) : B.cross(A);
+
+        //System.out.println("A: " + A.x + ", " + A.y + ", " + A.z);
+        //System.out.println("B: " + B.x + ", " + B.y + ", " + B.z);
+        //System.out.println(result.x + ", " + result.y + ", " + result.z + ", Face: " + faceNum);
 
         if (valueWithPlane(vertices[0], vertices[1], vertices[2], vertices[3]) == 0)
             return result;
@@ -118,7 +122,8 @@ public class Utils {
 
     public double angleBetweenVectors(Vector A, Vector B) {
         // This could be a possible place for errros.
-        return Math.acos((A.magnitude() * B.magnitude())/A.dot(B));
+        //System.out.println(A.dot(B)/(A.magnitude() * B.magnitude()));
+        return Math.acos(A.dot(B)/(A.magnitude() * B.magnitude()));
     }
 
     private double calculateAverageAngles(Cell cell) {
@@ -158,29 +163,36 @@ public class Utils {
         double step = INITIAL_STEP;
         Vector bestPosition = cell.getCentre();
         Vector currentPosition = cell.getCentre();
+        Vector originalCentre = cell.getCentre();
 
-        while (step > INITIAL_STEP/8) {
+        while (step > INITIAL_STEP/16) {
+            boolean changed = false;
             double currentBest = calculateAverageAngles(cell);
             Vector[] positions = probablePositions(cell.getCentre(), step);
 
             for(Vector v : positions) {
+                //System.out.println();
                 cell.setCentre(v);
                 double probableBest = calculateAverageAngles(cell);
 
                 if (probableBest < currentBest) {
                     currentPosition = v;
                     currentBest = probableBest;
+                    changed = true;
                 }
             }
 
-            if(bestPosition.equals(currentPosition)) {
-                step /= 2;
-            } else if (insideCell(cell, currentPosition)) {
+            if (changed && insideCell(cell, currentPosition)) {
                 bestPosition = currentPosition;
+                cell.setCentre(bestPosition);
+                originalCentre = currentPosition;
+            } else {
+                cell.setCentre(originalCentre);
+                step /= 2;
             }
-        }
 
-        cell.setCentre(bestPosition);
+            changed = false;
+        }
 
         return cell.getCentre();
     }
