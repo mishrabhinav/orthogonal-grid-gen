@@ -7,12 +7,14 @@ import java.util.ArrayList;
  */
 public class Cell {
 
+    private int cellID;
     private Vector centre;
     public Vector pointInside;
     private ArrayList<Vector> vertices;
     private ArrayList<Integer> neighbours;
 
-    public Cell(Vector centre){
+    public Cell(int cellID, Vector centre){
+        this.cellID = cellID;
         this.centre = centre;
         this.pointInside = new Vector(centre.x, centre.y, centre.z);
         this.vertices = new ArrayList<Vector>();
@@ -98,5 +100,10 @@ public class Cell {
         }
 
         return vertices;
+    }
+
+    @Override
+    public String toString() {
+        return "Cell ID: " + cellID + ", Centre: (" + centre.x + ", " + centre.y + ", " + centre.z + ")\n";
     }
 }
