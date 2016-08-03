@@ -1,8 +1,8 @@
 package com.slb.utils;
 
-import com.slb.gridcomponents.Cell;
-import com.slb.gridcomponents.Grid;
-import com.slb.gridcomponents.Vector;
+import com.slb.components.Cell;
+import com.slb.components.Grid;
+import com.slb.components.Vector;
 
 /**
  * Created by AMishra12 on 25/07/2016.
@@ -115,7 +115,7 @@ public class Utils {
                     vertices[1].y - vertices[2].y,
                     vertices[1].z - vertices[2].z);
 
-        result.add(D.cross(C));
+        result.add(faceNum % 2 == 0 ? D.cross(C) : C.cross(D));
 
         return result;
     }

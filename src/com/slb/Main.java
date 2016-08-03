@@ -1,12 +1,15 @@
 package com.slb;
 
-import com.slb.gridcomponents.Cell;
-import com.slb.gridcomponents.Grid;
+import com.slb.components.Cell;
+import com.slb.components.Grid;
 import com.slb.utils.GridUtils;
+import org.json.JSONException;
+
+import java.io.FileNotFoundException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JSONException, FileNotFoundException {
 
         GridUtils loader = new GridUtils(args[0]);
         Grid grid = loader.loadGrid();

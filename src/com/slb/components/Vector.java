@@ -1,4 +1,4 @@
-package com.slb.gridcomponents;
+package com.slb.components;
 
 /**
  * Created by AMishra12 on 22/07/2016.

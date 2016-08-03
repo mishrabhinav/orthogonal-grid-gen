@@ -1,4 +1,4 @@
-package com.slb.gridcomponents;
+package com.slb.components;
 
 import java.util.ArrayList;
 

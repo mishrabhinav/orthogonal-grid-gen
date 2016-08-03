@@ -1,9 +1,12 @@
 package com.slb.utils;
 
-import com.slb.gridcomponents.Cell;
-import com.slb.gridcomponents.Grid;
-import com.slb.gridcomponents.Vector;
+import com.slb.components.Cell;
+import com.slb.components.Grid;
+import com.slb.components.Vector;
+import com.slb.parser.GridParser;
+import org.json.JSONException;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,19 +18,22 @@ public class GridUtils {
     private String input;
     private Grid grid;
     public Utils utils;
+    private GridParser parser;
 
-    public GridUtils(String input) {
+    public GridUtils(String input) throws JSONException, FileNotFoundException {
         this.input = input;
         this.grid = new Grid();
+        this.parser = new GridParser(this.grid);
+        parser.loadFile(input);
     }
 
     /*
      * The top face vertices are specified first followed by the bottom four.
      * Follow the ordering Sheleem mentioned.
      */
-    public Grid loadGrid() {
-
-        loadBigMockData();
+    public Grid loadGrid() throws JSONException {
+        //loadBigMockData();
+        parser.parseFile();
         utils = new Utils(grid);
 
         return grid;
@@ -188,7 +194,7 @@ public class GridUtils {
 
         v0 = new Vector(0,0,10);
         v1 = new Vector(0,10,10);
-        v2 = new Vector(10,10,10);
+        v2 = new Vector(20,10,10);
         v3 = new Vector(10,0,10);
         v4 = new Vector(0,0,0);
         v5 = new Vector(0,10,0);
@@ -241,7 +247,7 @@ public class GridUtils {
         cell = new Cell(2, new Vector(15, 5, 5));
 
         v0 = new Vector(10,0,10);
-        v1 = new Vector(10,10,10);
+        v1 = new Vector(20,10,10);
         v2 = new Vector(20,10,10);
         v3 = new Vector(20,0,10);
         v4 = new Vector(10,0,0);
