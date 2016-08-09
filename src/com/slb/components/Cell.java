@@ -21,6 +21,10 @@ public class Cell {
         this.neighbours = new ArrayList<Integer>();
     }
 
+    public int getCellID() {
+        return cellID;
+    }
+
     public Vector getCentre() {
         return centre;
     }

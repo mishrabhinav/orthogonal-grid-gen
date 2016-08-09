@@ -10,7 +10,6 @@ import com.slb.components.Vector;
 public class Utils {
 
     private Grid parentGrid;
-    private double INITIAL_STEP = 2;
 
     public Utils(Grid parentGrid) {
         this.parentGrid = parentGrid;
@@ -160,12 +159,12 @@ public class Utils {
 
     public Vector directSearch(Cell cell) {
 
-        double step = INITIAL_STEP;
+        double step = Globals.INITIAL_STEP;
         Vector bestPosition = cell.getCentre();
         Vector currentPosition = cell.getCentre();
         Vector originalCentre = cell.getCentre();
 
-        while (step > INITIAL_STEP/16) {
+        while (step > Globals.INITIAL_STEP/20) {
             boolean changed = false;
             double currentBest = calculateAverageAngles(cell);
             Vector[] positions = probablePositions(cell.getCentre(), step);
@@ -190,8 +189,6 @@ public class Utils {
                 cell.setCentre(originalCentre);
                 step /= 2;
             }
-
-            changed = false;
         }
 
         return cell.getCentre();

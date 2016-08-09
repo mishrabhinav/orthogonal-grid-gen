@@ -4,6 +4,7 @@ import com.slb.components.Cell;
 import com.slb.components.Grid;
 import com.slb.components.Vector;
 import com.slb.utils.Globals;
+import com.sun.javafx.scene.control.GlobalMenuAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +30,8 @@ public class GridParser {
 
         String jsonData = (new Scanner(new File(inputFile))).useDelimiter("\\Z").next();
         gridObject = new JSONObject(jsonData);
-        //System.out.println(jsonData);
+        grid.setGridName(gridObject.getString(Globals.GRID_NAME));
+        grid.setNumberOfCells(gridObject.getInt(Globals.GRID_NUMBEROFCELLS));
     }
 
     public void parseFile() throws JSONException {
