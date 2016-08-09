@@ -63,7 +63,7 @@ public final class DebugUtils {
 
     public static void setupDebugUtils(String[] args) {
         if(args.length > 1) {
-            dumpFiles = args[1].equals("-g") ? true : false;
+            dumpFiles = args[1].equals("-g");
             setup = true;
         }
     }
@@ -73,7 +73,7 @@ public final class DebugUtils {
             File dump = new File(Globals.DEBUG_DUMP_FILE);
             output = new PrintStream(dump);
             printGrid(grid);
-        } else {
+        } else if(dumpFiles) {
             System.out.println("Could not dump files. DebugUtils not setup.");
         }
     }

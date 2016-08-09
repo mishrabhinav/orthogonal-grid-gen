@@ -14,8 +14,8 @@ public class Main {
     public static void main(String[] args) throws JSONException, FileNotFoundException {
         DebugUtils.setupDebugUtils(args);
 
-        GridUtils loader = new GridUtils(args[0]);
-        Grid grid = loader.loadGrid();
+        GridUtils gridUtils = new GridUtils(args[0]);
+        Grid grid = gridUtils.loadGrid();
 
 //        for(int i = 0; i < 5; i++) {
 //            System.out.print(grid.getCells().get(i).toString());
@@ -23,7 +23,7 @@ public class Main {
 //
 //        System.out.println();
 
-        loader.fixCells();
+        gridUtils.fixCells();
 
 //        for(int i = 0; i < 5; i++) {
 //            System.out.print(grid.getCells().get(i).toString());
