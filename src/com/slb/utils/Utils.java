@@ -3,6 +3,7 @@ package com.slb.utils;
 import com.slb.components.Cell;
 import com.slb.components.Grid;
 import com.slb.components.Vector;
+import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 /**
  * Created by AMishra12 on 25/07/2016.
@@ -10,9 +11,15 @@ import com.slb.components.Vector;
 public class Utils {
 
     private Grid parentGrid;
+    private boolean gridSupplied;
+
+    public Utils() {
+       this.gridSupplied = false;
+    }
 
     public Utils(Grid parentGrid) {
         this.parentGrid = parentGrid;
+        this.gridSupplied = true;
     }
 
     public Vector getBarycenter(Cell cell) {
@@ -78,11 +85,16 @@ public class Utils {
 
     public Vector vectorToCentre(Cell cell, int faceNum) {
 
-        Cell neighbour = parentGrid.getCells().get(cell.getNeighbours().get(faceNum));
+        if(gridSupplied) {
+            Cell neighbour = parentGrid.getCells().get(cell.getNeighbours().get(faceNum));
 
-        return new Vector(neighbour.getCentre().x - cell.getCentre().x,
-                neighbour.getCentre().y - cell.getCentre().y,
-                neighbour.getCentre().z - cell.getCentre().z);
+            return new Vector(neighbour.getCentre().x - cell.getCentre().x,
+                    neighbour.getCentre().y - cell.getCentre().y,
+                    neighbour.getCentre().z - cell.getCentre().z);
+        } else {
+            System.out.println("PARENT GRID NOT SUPPLIED. RETURNING NULL VECTOR.");
+            return new Vector(0,0,0);
+        }
     }
 
     public Vector faceNormal(Cell cell, int faceNum) {
