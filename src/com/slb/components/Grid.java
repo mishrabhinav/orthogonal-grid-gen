@@ -12,7 +12,7 @@ public class Grid {
     private HashMap<Integer, Cell> cells;
 
     public Grid() {
-        this.cells = new HashMap<Integer, Cell>();
+        this.cells = new HashMap<>();
     }
 
     public HashMap<Integer, Cell> getCells() {

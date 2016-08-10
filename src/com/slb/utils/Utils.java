@@ -3,11 +3,7 @@ package com.slb.utils;
 import com.slb.components.Cell;
 import com.slb.components.Grid;
 import com.slb.components.Vector;
-import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
-/**
- * Created by AMishra12 on 25/07/2016.
- */
 public class Utils {
 
     private Grid parentGrid;
@@ -132,8 +128,6 @@ public class Utils {
     }
 
     public double angleBetweenVectors(Vector A, Vector B) {
-        // This could be a possible place for errros.
-        //System.out.println(A.dot(B)/(A.magnitude() * B.magnitude()));
         return Math.acos(A.dot(B)/(A.magnitude() * B.magnitude()));
     }
 
@@ -172,7 +166,7 @@ public class Utils {
     public Vector directSearch(Cell cell) {
 
         double step = Globals.INITIAL_STEP;
-        Vector bestPosition = cell.getCentre();
+        Vector bestPosition;
         Vector currentPosition = cell.getCentre();
         Vector originalCentre = cell.getCentre();
 
@@ -182,7 +176,6 @@ public class Utils {
             Vector[] positions = probablePositions(cell.getCentre(), step);
 
             for(Vector v : positions) {
-                //System.out.println();
                 cell.setCentre(v);
                 double probableBest = calculateAverageAngles(cell);
 

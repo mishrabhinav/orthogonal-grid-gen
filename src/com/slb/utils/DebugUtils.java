@@ -9,24 +9,36 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-/**
- * Created by abhinavmishra on 03/08/2016.
- */
 public final class DebugUtils {
 
     private static PrintStream output;
 
-    private static boolean setup = false;
-    private static boolean dumpFiles = false;
+    public static void setupDebugUtils(String[] args) throws FileNotFoundException {
+        if(args.length > 1) {
+            if(args[1].equals(Globals.DEBUG_FILE))
+                output = new PrintStream(new File(Globals.DEBUG_DUMP_FILE));
+            else if (args[1].equals(Globals.DEBUG_STDOUT))
+                output = new PrintStream(System.out);
+
+            if(output == null)
+                System.out.println(Globals.DEBUG_SETUP_ERROR);
+        }
+
+    }
+
+    public static void checkAndDump(Grid grid) {
+        if(output != null)
+            printGrid(grid);
+    }
 
     private static void printVector(Vector v, String vectorName) {
-        output.printf("\t%s -> (%.2f, %.2f, %.2f)\n", vectorName, v.x, v.y, v.z);
+        output.printf(Globals.PRINT_VECTOR_NAME, vectorName, v.toString());
     }
 
     private static void printVertices(ArrayList<Vector> vertices, int length) {
         output.println();
         for(int i = 0; i < length; i++) {
-            printVector(vertices.get(i), ("Vertex " + Integer.toString(i)));
+            printVector(vertices.get(i), String.format(Globals.PRINT_VERTEX_NAME, i));
         }
     }
 
@@ -34,25 +46,25 @@ public final class DebugUtils {
         output.println();
         for(int i = 0; i < length; i++) {
             if(neighbours.get(i) != -1)
-                output.printf("\tFace %d -> Cell %d\n", i, neighbours.get(i));
+                output.printf(Globals.PRINT_FACE_NEIGHBOUR, i, neighbours.get(i));
             else
-                output.printf("\tFace %d -> No neighbour\n", i);
+                output.printf(Globals.PRINT_FACE_NO_NEIGHBOUR, i);
         }
     }
 
     private static void printCell(Cell cell) {
-        output.printf("Cell ID: %d\n", cell.getCellID());
-        printVector(cell.getCentre(), "Centre");
+        output.printf(Globals.PRINT_CELL_ID, cell.getCellID());
+        printVector(cell.getCentre(), Globals.PRINT_CENTER);
         printVertices(cell.getVertices(), cell.getVertices().size());
         printNeighbours(cell.getNeighbours(), cell.getNeighbours().size());
     }
 
     private static void printGrid(Grid grid) {
 
-        output.printf("Grid Name: %s\n", grid.getGridName());
-        output.printf("Number of Cells: %d\n", grid.getNumberOfCells());
+        output.printf(Globals.PRINT_GRID_NAME, grid.getGridName());
+        output.printf(Globals.PRINT_NUM_OF_CELLS, grid.getNumberOfCells());
         output.println(Globals.DEBUG_SECTION_LINE);
-        output.println("CELLS:");
+        output.println(Globals.PRINT_CELLS);
         output.println();
 
         for(int i = 0; i < grid.getNumberOfCells(); i++) {
@@ -61,20 +73,4 @@ public final class DebugUtils {
         }
     }
 
-    public static void setupDebugUtils(String[] args) {
-        if(args.length > 1) {
-            dumpFiles = args[1].equals("-g");
-            setup = true;
-        }
-    }
-
-    public static void checkIfDumpRequiredAndDump(Grid grid) throws FileNotFoundException {
-        if(dumpFiles && setup) {
-            File dump = new File(Globals.DEBUG_DUMP_FILE);
-            output = new PrintStream(dump);
-            printGrid(grid);
-        } else if(dumpFiles) {
-            System.out.println("Could not dump files. DebugUtils not setup.");
-        }
-    }
 }

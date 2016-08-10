@@ -1,10 +1,9 @@
 package com.slb.components;
 
+import com.slb.utils.Globals;
+
 import java.util.ArrayList;
 
-/**
- * Created by AMishra12 on 22/07/2016.
- */
 public class Cell {
 
     private int cellID;
@@ -12,13 +11,15 @@ public class Cell {
     public Vector pointInside;
     private ArrayList<Vector> vertices;
     private ArrayList<Integer> neighbours;
+    private int validNeighbours;
 
     public Cell(int cellID, Vector centre){
         this.cellID = cellID;
         this.centre = centre;
-        this.pointInside = new Vector(centre.x, centre.y, centre.z);
-        this.vertices = new ArrayList<Vector>();
-        this.neighbours = new ArrayList<Integer>();
+        this.pointInside = centre.clone();
+        this.vertices = new ArrayList<>();
+        this.neighbours = new ArrayList<>();
+        this.validNeighbours = 0;
     }
 
     public int getCellID() {
@@ -42,18 +43,17 @@ public class Cell {
     }
 
     public int getValidNeighbours() {
-        int valid = 0;
+        if(validNeighbours == 0) {
+            for (int n : neighbours)
+                validNeighbours += n != -1 ? 1 : 0;
+        }
 
-        for(int n : neighbours)
-            valid += n != -1 ? 1 : 0;
-
-        return valid;
+        return validNeighbours;
     }
 
     public Vector[] getFace(int faceNum) {
 
         // NOTE: Face and Vector ordering is different in Intersect.
-
         Vector[] vertices = new Vector[4];
 
         switch (faceNum) {
@@ -100,7 +100,7 @@ public class Cell {
                 break;
 
             default:
-                System.out.println("Face number should be in range 0-5.");
+                System.out.println("BUG: Face number should be in range 0-5.");
         }
 
         return vertices;
@@ -108,6 +108,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return "Cell ID: " + cellID + ", Centre: (" + centre.x + ", " + centre.y + ", " + centre.z + ")\n";
+        return String.format(Globals.PRINT_CELL, cellID, centre.toString());
     }
 }
