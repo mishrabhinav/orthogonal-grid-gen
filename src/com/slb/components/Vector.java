@@ -72,4 +72,23 @@ public class Vector {
         return new Vector(this.y * B.z - this.z * B.y, this.z * B.x - this.x * B.z, this.x * B.y - this.y * B.x);
     }
 
+    @Override
+    public boolean equals(Object that) {
+        if(!(that instanceof Vector))
+            return false;
+        else {
+            Vector thatVector = (Vector) that;
+            return thatVector.x == this.x && thatVector.y == this.y && thatVector.z == this.z;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return ((int) x) + ((int) y) + ((int) z);
+    }
+
+    @Override
+    public String toString() {
+        return "Vector: " + "("+x+","+y+","+z+")";
+    }
 }
