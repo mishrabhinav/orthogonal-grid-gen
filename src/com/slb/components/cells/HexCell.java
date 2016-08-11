@@ -1,56 +1,14 @@
-package com.slb.components;
+package com.slb.components.cells;
 
-import com.slb.utils.Globals;
+import com.slb.components.Vector;
 
-import java.util.ArrayList;
+public class HexCell extends Cell {
 
-public class Cell {
-
-    private int cellID;
-    private Vector centre;
-    public Vector pointInside;
-    private ArrayList<Vector> vertices;
-    private ArrayList<Integer> neighbours;
-    private int validNeighbours;
-
-    public Cell(int cellID, Vector centre){
-        this.cellID = cellID;
-        this.centre = centre;
-        this.pointInside = centre.clone();
-        this.vertices = new ArrayList<>();
-        this.neighbours = new ArrayList<>();
-        this.validNeighbours = 0;
+    public HexCell(int cellID, Vector centre){
+       super(cellID, centre);
     }
 
-    public int getCellID() {
-        return cellID;
-    }
-
-    public Vector getCentre() {
-        return centre;
-    }
-
-    public void setCentre(Vector centre) {
-        this.centre = centre;
-    }
-
-    public ArrayList<Vector> getVertices() {
-        return vertices;
-    }
-
-    public ArrayList<Integer> getNeighbours() {
-        return neighbours;
-    }
-
-    public int getValidNeighbours() {
-        if(validNeighbours == 0) {
-            for (int n : neighbours)
-                validNeighbours += n != -1 ? 1 : 0;
-        }
-
-        return validNeighbours;
-    }
-
+    @Override
     public Vector[] getFace(int faceNum) {
 
         // NOTE: Face and Vector ordering is different in Intersect.
@@ -100,14 +58,9 @@ public class Cell {
                 break;
 
             default:
-                System.out.println("BUG: Face number should be in range 0-5.");
+                System.out.println("BUG: Face number for a hex cell should be in range 0-5.");
         }
 
         return vertices;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(Globals.PRINT_CELL, cellID, centre.toString());
     }
 }

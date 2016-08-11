@@ -1,6 +1,6 @@
 package com.slb.utils;
 
-import com.slb.components.Cell;
+import com.slb.components.cells.Cell;
 import com.slb.components.Grid;
 import com.slb.components.Vector;
 

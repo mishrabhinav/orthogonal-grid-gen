@@ -1,16 +1,14 @@
 package com.slb.testing;
 
-import com.slb.components.Cell;
+import com.slb.components.cells.Cell;
 import com.slb.components.Vector;
+import com.slb.components.cells.HexCell;
 import com.slb.utils.Utils;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by abhinavmishra on 27/07/2016.
- */
 public class UtilsTest {
 
     @Ignore
@@ -37,10 +35,42 @@ public class UtilsTest {
 
     }
 
-    @Ignore
     @Test
-    public void insideCell() throws Exception {
+    public void insideCellTrue() throws Exception {
+        Utils utils = new Utils();
 
+        Cell c = new HexCell(0, new Vector(5, 5, 5));
+        c.getVertices().add(0,new Vector(0,0,10));
+        c.getVertices().add(1,new Vector(0,10,10));
+        c.getVertices().add(2,new Vector(10,10,10));
+        c.getVertices().add(3,new Vector(10,0,10));
+        c.getVertices().add(4,new Vector(0,0,0));
+        c.getVertices().add(5,new Vector(0,10,0));
+        c.getVertices().add(6,new Vector(10,10,0));
+        c.getVertices().add(7,new Vector(10,0,0));
+
+        boolean inside = utils.insideCell(c, new Vector(7,7,7));
+
+        assertEquals(true, inside);
+    }
+
+    @Test
+    public void insideCellFalse() throws Exception {
+        Utils utils = new Utils();
+
+        Cell c = new HexCell(0, new Vector(5, 5, 5));
+        c.getVertices().add(0,new Vector(0,0,10));
+        c.getVertices().add(1,new Vector(0,10,10));
+        c.getVertices().add(2,new Vector(10,10,10));
+        c.getVertices().add(3,new Vector(10,0,10));
+        c.getVertices().add(4,new Vector(0,0,0));
+        c.getVertices().add(5,new Vector(0,10,0));
+        c.getVertices().add(6,new Vector(10,10,0));
+        c.getVertices().add(7,new Vector(10,0,0));
+
+        boolean inside = utils.insideCell(c, new Vector(5,11,5));
+
+        assertEquals(false, inside);
     }
 
     @Ignore
@@ -53,7 +83,7 @@ public class UtilsTest {
     public void faceNormalPlanar() throws Exception {
         Utils utils = new Utils();
 
-        Cell c = new Cell(0, new Vector(0, 0, 0));
+        Cell c = new HexCell(0, new Vector(0, 0, 0));
         c.getVertices().add(0, new Vector(1,2,1) );
         c.getVertices().add(1, new Vector(2,1,0) );
         c.getVertices().add(2, new Vector(3,1,1) );
@@ -68,7 +98,7 @@ public class UtilsTest {
     public void faceNormalNonPlanar() throws Exception {
         Utils utils = new Utils();
 
-        Cell c = new Cell(0, new Vector(0, 0, 0));
+        Cell c = new HexCell(0, new Vector(0, 0, 0));
         c.getVertices().add(0, new Vector(1,2,1) );
         c.getVertices().add(1, new Vector(2,1,0) );
         c.getVertices().add(2, new Vector(4,1,1) );

@@ -1,8 +1,9 @@
 package com.slb.parser;
 
-import com.slb.components.Cell;
+import com.slb.components.cells.Cell;
 import com.slb.components.Grid;
 import com.slb.components.Vector;
+import com.slb.components.cells.HexCell;
 import com.slb.utils.Globals;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +45,7 @@ public class GridParser {
             JSONArray cellVertices = cellObject.getJSONArray(Globals.JSON_CELL_VERTICES);
             int numberOfVertices = cellObject.getInt(Globals.JSON_CELL_NUM_OF_VERTICES);
 
-            Cell cell = new Cell(i, new Vector(cellCentre.getDouble(Globals.JSON_VERTEX_X),
+            Cell cell = new HexCell(i, new Vector(cellCentre.getDouble(Globals.JSON_VERTEX_X),
                                                cellCentre.getDouble(Globals.JSON_VERTEX_Y),
                                                cellCentre.getDouble(Globals.JSON_VERTEX_Z)));
 

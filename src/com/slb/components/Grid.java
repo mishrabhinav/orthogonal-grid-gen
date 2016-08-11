@@ -1,5 +1,7 @@
 package com.slb.components;
 
+import com.slb.components.cells.Cell;
+
 import java.util.HashMap;
 
 /**

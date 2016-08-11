@@ -1,6 +1,6 @@
 package com.slb.utils;
 
-import com.slb.components.Cell;
+import com.slb.components.cells.Cell;
 import com.slb.components.Grid;
 import com.slb.components.Vector;
 
@@ -166,11 +166,12 @@ public class Utils {
     public Vector directSearch(Cell cell) {
 
         double step = Globals.INITIAL_STEP;
+        int i = 2;
         Vector bestPosition;
         Vector currentPosition = cell.getCentre();
-        Vector originalCentre = cell.getCentre();
+        Vector originalCentre = cell.getCentre().clone();
 
-        while (step > Globals.INITIAL_STEP/20) {
+        while (step > Globals.INITIAL_STEP/100) {
             boolean changed = false;
             double currentBest = calculateAverageAngles(cell);
             Vector[] positions = probablePositions(cell.getCentre(), step);
@@ -192,7 +193,7 @@ public class Utils {
                 originalCentre = currentPosition;
             } else {
                 cell.setCentre(originalCentre);
-                step /= 2;
+                step = Globals.INITIAL_STEP / (i++);
             }
         }
 

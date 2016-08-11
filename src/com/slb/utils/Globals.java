@@ -3,6 +3,7 @@ package com.slb.utils;
 public final class Globals {
 
     public static final double INITIAL_STEP                    = 2.0;
+    public static final
 
     public static final String JSON_NAME                       = "name";
     public static final String JSON_NUM_OF_CELLS               = "numberOfCells";
@@ -28,7 +29,7 @@ public final class Globals {
     public static final String PRINT_VERTEX_NAME               = "Vector %d";
     public static final String PRINT_CENTER                    = "Center";
     public static final String PRINT_CELL_ID                   = "Cell ID: %d\n";
-    public static final String PRINT_CELL                      = "Cell ID: %i, Centre: %s\n";
+    public static final String PRINT_CELL                      = "Cell ID: %d, Centre: %s\n";
     public static final String PRINT_FACE_NEIGHBOUR            = "\tFace %d -> Cell %d\n";
     public static final String PRINT_FACE_NO_NEIGHBOUR         = "\tFace %d -> No neighbour\n";
 

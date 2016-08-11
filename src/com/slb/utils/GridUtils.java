@@ -6,9 +6,6 @@ import org.json.JSONException;
 
 import java.io.FileNotFoundException;
 
-/**
- * Created by AMishra12 on 22/07/2016.
- */
 public class GridUtils {
 
     private Grid grid;
@@ -33,7 +30,8 @@ public class GridUtils {
     }
 
     public void fixCells() {
-        for(int i : new int[]{0,1,2,3,4})
+        for(int i : new int[]{0,1,2,3,4}) {
             utils.directSearch(grid.getCells().get(i));
+        }
     }
 }
