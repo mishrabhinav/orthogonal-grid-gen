@@ -4,6 +4,7 @@ import com.slb.components.cells.Cell;
 import com.slb.components.Grid;
 import com.slb.components.Vector;
 import com.slb.components.cells.HexCell;
+import com.slb.components.cells.TdFCell;
 import com.slb.utils.Globals;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +38,7 @@ public class GridParser {
     public void parseFile() throws JSONException {
 
         int numberOfCells = gridObject.getInt(Globals.JSON_NUM_OF_CELLS);
+        int gridType = gridObject.getInt(Globals.JSON_GRID_TYPE);
         JSONArray cells = gridObject.getJSONArray(Globals.JSON_CELLS);
 
         for(int i = 0; i < numberOfCells; i++) {
@@ -45,9 +47,20 @@ public class GridParser {
             JSONArray cellVertices = cellObject.getJSONArray(Globals.JSON_CELL_VERTICES);
             int numberOfVertices = cellObject.getInt(Globals.JSON_CELL_NUM_OF_VERTICES);
 
-            Cell cell = new HexCell(i, new Vector(cellCentre.getDouble(Globals.JSON_VERTEX_X),
-                                               cellCentre.getDouble(Globals.JSON_VERTEX_Y),
-                                               cellCentre.getDouble(Globals.JSON_VERTEX_Z)));
+            Cell cell = null;
+
+            if(gridType == Globals.GRID_TYPE_HEX) {
+                cell = new HexCell(i, new Vector(cellCentre.getDouble(Globals.JSON_VERTEX_X),
+                        cellCentre.getDouble(Globals.JSON_VERTEX_Y),
+                        cellCentre.getDouble(Globals.JSON_VERTEX_Z)));
+            } else if(gridType == Globals.GRID_TYPE_2D5) {
+                cell = new TdFCell(i, new Vector(cellCentre.getDouble(Globals.JSON_VERTEX_X),
+                        cellCentre.getDouble(Globals.JSON_VERTEX_Y),
+                        cellCentre.getDouble(Globals.JSON_VERTEX_Z)));
+            } else {
+                System.out.println(Globals.ERROR_JSON_GRID);
+                System.exit(1);
+            }
 
             ArrayList<Vector> vertices = cell.getVertices();
             ArrayList<Integer> neighbours = cell.getNeighbours();

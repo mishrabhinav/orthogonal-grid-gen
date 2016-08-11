@@ -3,9 +3,11 @@ package com.slb.utils;
 public final class Globals {
 
     public static final double INITIAL_STEP                    = 2.0;
-    public static final
+    public static final int    GRID_TYPE_HEX                   = 0;
+    public static final int    GRID_TYPE_2D5                   = 1;
 
     public static final String JSON_NAME                       = "name";
+    public static final String JSON_GRID_TYPE                  = "type";
     public static final String JSON_NUM_OF_CELLS               = "numberOfCells";
     public static final String JSON_CELLS                      = "cells";
     public static final String JSON_CELL_ID                    = "id";
@@ -19,6 +21,7 @@ public final class Globals {
 
     public static final String WARNING_DUMP_FAIL               = "WARNING: Dump setup failed. Data will not be dumped.";
     public static final String ERROR_JSON_FILE                 = "ERROR: JSON Grid file could not be opened.";
+    public static final String ERROR_JSON_GRID                 = "ERROR: JSON Grid type not recognised.";
     public static final String ERROR_JSON_LOAD                 = "ERROR: JSON Grid data could not be loaded.";
 
     public static final String PRINT_GRID_NAME                 = "Grid Name: %s\n";
