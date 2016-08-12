@@ -11,6 +11,7 @@ public class Grid {
 
     private String gridName;
     private int numberOfCells;
+    private int gridType;
     private HashMap<Integer, Cell> cells;
 
     public Grid() {
@@ -35,5 +36,13 @@ public class Grid {
 
     public void setNumberOfCells(int numberOfCells) {
         this.numberOfCells = numberOfCells;
+    }
+
+    public int getGridType() {
+        return gridType;
+    }
+
+    public void setGridType(int gridType) {
+        this.gridType = gridType;
     }
 }

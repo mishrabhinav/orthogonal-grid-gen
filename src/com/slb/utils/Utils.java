@@ -105,7 +105,8 @@ public class Utils {
                     vertices[1].y - vertices[0].y,
                     vertices[1].z - vertices[0].z);
 
-        Vector result = faceNum % 2 == 0 ? A.cross(B) : B.cross(A);
+
+        Vector result = A.cross(B);
 
         //System.out.println("A: " + A.x + ", " + A.y + ", " + A.z);
         //System.out.println("B: " + B.x + ", " + B.y + ", " + B.z);
@@ -122,7 +123,7 @@ public class Utils {
                     vertices[1].y - vertices[2].y,
                     vertices[1].z - vertices[2].z);
 
-        result.add(faceNum % 2 == 0 ? D.cross(C) : C.cross(D));
+        result.add(faceNum % 2 != 0 ? D.cross(C) : C.cross(D));
 
         return result;
     }
