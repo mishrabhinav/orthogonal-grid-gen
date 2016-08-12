@@ -4,8 +4,8 @@ import com.slb.components.Vector;
 
 public class TdFCell extends Cell {
 
-    public TdFCell(int cellID, Vector centre) {
-        super(cellID, centre);
+    public TdFCell(int cellID) {
+        super(cellID, null);
     }
 
     @Override

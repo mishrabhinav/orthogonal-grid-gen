@@ -17,10 +17,12 @@ public abstract class Cell {
     public Cell(int cellID, Vector centre){
         this.cellID = cellID;
         this.centre = centre;
-        this.pointInside = centre.clone();
         this.vertices = new ArrayList<>();
         this.neighbours = new ArrayList<>();
         this.validNeighbours = 0;
+
+        if(centre != null)
+            this.pointInside = centre.clone();
     }
 
     public int getCellID() {
