@@ -1,6 +1,5 @@
 {
   "name": "Simple Parallelepiped Grid",
-  "numberOfCells": 5,
   "type": 0,
   "cells": [
     {
@@ -10,7 +9,6 @@
         "y": 7,
         "z": 7
       },
-      "numberOfVertices": 8,
       "vertices": [
         {
           "x": 2,
@@ -62,7 +60,6 @@
         "y": 15,
         "z": 5
       },
-      "numberOfVertices": 8,
       "vertices": [
         {
           "x": 2,
@@ -114,7 +111,6 @@
         "y": 5,
         "z": 5
       },
-      "numberOfVertices": 8,
       "vertices": [
         {
           "x": 12,
@@ -166,7 +162,6 @@
         "y": -5,
         "z": 5
       },
-      "numberOfVertices": 8,
       "vertices": [
         {
           "x": 2,
@@ -218,7 +213,6 @@
         "y": 5,
         "z": 5
       },
-      "numberOfVertices": 8,
       "vertices": [
         {
           "x": -12,
