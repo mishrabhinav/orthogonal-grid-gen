@@ -37,6 +37,10 @@ public abstract class Cell {
         this.centre = centre;
     }
 
+    public void setPointInside(Vector v) {
+        this.pointInside = v.clone();
+    }
+
     public ArrayList<Vector> getVertices() {
         return vertices;
     }

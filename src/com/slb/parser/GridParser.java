@@ -5,6 +5,7 @@ import com.slb.components.Vector;
 import com.slb.components.cells.Cell;
 import com.slb.components.cells.HexCell;
 import com.slb.components.cells.TdFCell;
+import com.slb.utils.CommandUtils;
 import com.slb.utils.Globals;
 import com.slb.utils.Utils;
 import org.json.JSONArray;
@@ -28,7 +29,9 @@ public class GridParser {
         this.grid = grid;
     }
 
-    public void loadFile(String inputFile) throws JSONException, FileNotFoundException {
+    public void loadFile() throws JSONException, FileNotFoundException {
+
+        String inputFile = CommandUtils.getCommand().getInputFile();
 
         String jsonData = (new Scanner(new File(inputFile))).useDelimiter("\\Z").next();
         gridObject = new JSONObject(jsonData);
@@ -103,7 +106,7 @@ public class GridParser {
 
 
         for(int i = 0; i < 2 * numberOfVertices; i++) {
-            int offset = currentLayer + i >= numberOfVertices ? 1 : 0;
+            int offset = currentLayer + (i >= numberOfVertices ? 1 : 0);
             JSONObject vertex = cellVertices.getJSONObject(i % numberOfVertices);
             vertices.add(i, new Vector(vertex.getDouble(Globals.JSON_VERTEX_X),
                                        vertex.getDouble(Globals.JSON_VERTEX_Y),
@@ -112,6 +115,7 @@ public class GridParser {
         }
 
         cell.setCentre((new Utils()).getBarycenter(cell));
+        cell.setPointInside((new Utils()).getBarycenter(cell));
 
         for(int j = 0; j < numberOfVertices + 2; j++) {
             if (currentLayer == 0 && j == 0)
@@ -122,8 +126,13 @@ public class GridParser {
                 neighbours.add(j, cellCount - (numCells / layers));
             else if (j == 1)
                 neighbours.add(j, cellCount + (numCells / layers));
-            else
-                neighbours.add(j, cellObject.getJSONArray(Globals.JSON_CELL_NEIGHBOURS).getInt(j - 2));
+            else {
+                int n = cellObject.getJSONArray(Globals.JSON_CELL_NEIGHBOURS).getInt(j - 2);
+                int shifted = currentLayer * (numCells / layers);
+
+                neighbours.add(j, (n != -1 ? shifted : 0) + n);
+            }
+
         }
 
         return cell;
