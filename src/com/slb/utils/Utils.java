@@ -71,7 +71,9 @@ public class Utils {
 
     public boolean insideCell(Cell cell, Vector v) {
 
-        for (int i = 0; i < 6; i ++) {
+        int numVertices = cell.getVertices().size();
+
+        for (int i = 0; i < numVertices/2 + 2; i ++) {
             if(!arePointsOnSameSide(cell, i, cell.pointInside, v))
                 return false;
         }
@@ -97,9 +99,9 @@ public class Utils {
 
         Vector[] vertices = cell.getFace(faceNum);
 
-        Vector A = new Vector(vertices[3].x - vertices[0].x,
-                    vertices[3].y - vertices[0].y,
-                    vertices[3].z - vertices[0].z);
+        Vector A = new Vector(vertices[2].x - vertices[0].x,
+                    vertices[2].y - vertices[0].y,
+                    vertices[2].z - vertices[0].z);
 
         Vector B = new Vector(vertices[1].x - vertices[0].x,
                     vertices[1].y - vertices[0].y,
@@ -112,16 +114,16 @@ public class Utils {
         //System.out.println("B: " + B.x + ", " + B.y + ", " + B.z);
         //System.out.println(result.x + ", " + result.y + ", " + result.z + ", Face: " + faceNum);
 
-        if (valueWithPlane(vertices[0], vertices[1], vertices[2], vertices[3]) == 0)
+        if (vertices.length == 3 || valueWithPlane(vertices[0], vertices[1], vertices[2], vertices[3]) == 0)
             return result;
 
-        Vector C = new Vector(vertices[3].x - vertices[2].x,
-                    vertices[3].y - vertices[2].y,
-                    vertices[3].z - vertices[2].z);
+        Vector C = new Vector(vertices[3].x - vertices[0].x,
+                    vertices[3].y - vertices[0].y,
+                    vertices[3].z - vertices[0].z);
 
-        Vector D = new Vector(vertices[1].x - vertices[2].x,
-                    vertices[1].y - vertices[2].y,
-                    vertices[1].z - vertices[2].z);
+        Vector D = new Vector(vertices[2].x - vertices[0].x,
+                    vertices[2].y - vertices[0].y,
+                    vertices[2].z - vertices[0].z);
 
         result.add(faceNum % 2 != 0 ? D.cross(C) : C.cross(D));
 
@@ -135,8 +137,9 @@ public class Utils {
     private double calculateAverageAngles(Cell cell) {
 
         double sum_theta = 0;
+        int numVertices = cell.getVertices().size();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < (numVertices/2 + 2); i++) {
             if (cell.getNeighbours().get(i) == -1)
                 continue;
 
@@ -167,12 +170,12 @@ public class Utils {
     public Vector directSearch(Cell cell) {
 
         double step = Globals.INITIAL_STEP;
-        int i = 2;
+        int stepSize = CommandUtils.getCommand().getStepSize();
         Vector bestPosition;
         Vector currentPosition = cell.getCentre();
         Vector originalCentre = cell.getCentre().clone();
 
-        while (step > Globals.INITIAL_STEP/100) {
+        while (step > Globals.INITIAL_STEP/stepSize) {
             boolean changed = false;
             double currentBest = calculateAverageAngles(cell);
             Vector[] positions = probablePositions(cell.getCentre(), step);
@@ -194,7 +197,7 @@ public class Utils {
                 originalCentre = currentPosition;
             } else {
                 cell.setCentre(originalCentre);
-                step = Globals.INITIAL_STEP / (i++);
+                step /= 2;
             }
         }
 

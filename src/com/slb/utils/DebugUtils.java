@@ -13,16 +13,16 @@ public final class DebugUtils {
 
     private static PrintStream output;
 
-    public static void setupDebugUtils(String[] args) throws FileNotFoundException {
-        if(args.length > 1) {
-            if(args[1].equals(Globals.DEBUG_FILE))
+    public static void setupDebugUtils() throws FileNotFoundException {
+        CommandUtils commander = CommandUtils.getCommand();
+
+            if(commander.isDumpToFile())
                 output = new PrintStream(new File(Globals.DEBUG_DUMP_FILE));
-            else if (args[1].equals(Globals.DEBUG_STDOUT))
+            else if (commander.isDumpToSTDOut())
                 output = new PrintStream(System.out);
 
             if(output == null)
                 System.out.println(Globals.DEBUG_SETUP_ERROR);
-        }
 
     }
 

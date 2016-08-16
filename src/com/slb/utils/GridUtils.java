@@ -12,16 +12,12 @@ public class GridUtils {
     public Utils utils;
     private GridParser parser;
 
-    public GridUtils(String inputFile) throws JSONException, FileNotFoundException {
+    public GridUtils() throws JSONException, FileNotFoundException {
         this.grid = new Grid();
         this.parser = new GridParser(this.grid);
-        this.parser.loadFile(inputFile);
+        this.parser.loadFile();
     }
 
-    /*
-     * The top face vertices are specified first followed by the bottom four.
-     * Follow the ordering Sheleem mentioned.
-     */
     public Grid loadGrid() throws JSONException {
         parser.parseFile();
         utils = new Utils(grid);
@@ -30,7 +26,7 @@ public class GridUtils {
     }
 
     public void fixCells() {
-        for(int i : new int[]{0,1,2,3,4}) {
+        for(int i = 0; i < grid.getNumberOfCells(); i++) {
             utils.directSearch(grid.getCells().get(i));
         }
     }

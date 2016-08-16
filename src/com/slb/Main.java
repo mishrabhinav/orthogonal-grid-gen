@@ -1,6 +1,7 @@
 package com.slb;
 
 import com.slb.components.Grid;
+import com.slb.utils.CommandUtils;
 import com.slb.utils.DebugUtils;
 import com.slb.utils.Globals;
 import com.slb.utils.GridUtils;
@@ -15,14 +16,16 @@ public class Main {
 
     public static void main(String[] args) {
 
+        CommandUtils commander = CommandUtils.setupCommand(args);
+
         try {
-            DebugUtils.setupDebugUtils(args);
+            DebugUtils.setupDebugUtils();
         } catch(FileNotFoundException e) {
             System.out.println(Globals.WARNING_DUMP_FAIL);
         }
 
         try {
-            gridUtils = new GridUtils(args[0]);
+            gridUtils = new GridUtils();
             grid = gridUtils.loadGrid();
         } catch(FileNotFoundException e) {
             System.out.println(Globals.ERROR_JSON_FILE);
@@ -33,7 +36,8 @@ public class Main {
             System.exit(1);
         }
 
-        gridUtils.fixCells();
+        for(int i = 0; i < commander.getNumberOfRuns(); i++)
+            gridUtils.fixCells();
 
         DebugUtils.checkAndDump(grid);
     }
