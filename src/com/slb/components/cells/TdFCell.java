@@ -29,8 +29,8 @@ public class TdFCell extends Cell {
                     break;
                 default:
                     faceVertices.add(0, vertices.get(faceNum - 2));
-                    faceVertices.add(1, vertices.get(lastFace != faceNum ? numVertices/2 + faceNum - 1 : numVertices/2));
-                    faceVertices.add(2, vertices.get(numVertices/2 + faceNum - 2));
+                    faceVertices.add(1, vertices.get(numVertices/2 + faceNum - 2));
+                    faceVertices.add(2, vertices.get(lastFace != faceNum ? numVertices/2 + faceNum - 1 : numVertices/2));
                     faceVertices.add(3, vertices.get(lastFace != faceNum ? faceNum - 1 : 0));
                     break;
             }

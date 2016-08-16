@@ -36,9 +36,11 @@ public class Main {
             System.exit(1);
         }
 
+        DebugUtils.checkAndDump(grid, 0);
+
         for(int i = 0; i < commander.getNumberOfRuns(); i++)
             gridUtils.fixCells();
 
-        DebugUtils.checkAndDump(grid);
+        DebugUtils.checkAndDump(grid, 2);
     }
 }

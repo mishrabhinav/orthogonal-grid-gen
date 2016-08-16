@@ -26,7 +26,7 @@ public final class DebugUtils {
 
     }
 
-    public static void checkAndDump(Grid grid) {
+    public static void checkAndDump(Grid grid, int stage) {
         if(output != null)
             printGrid(grid);
     }
