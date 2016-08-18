@@ -61,8 +61,6 @@ public final class DebugUtils {
 
     private static void printGrid(Grid grid) {
 
-        output.printf(Globals.PRINT_GRID_NAME, grid.getGridName());
-        output.printf(Globals.PRINT_NUM_OF_CELLS, grid.getNumberOfCells());
         output.println(Globals.DEBUG_SECTION_LINE);
         output.println(Globals.PRINT_CELLS);
         output.println();
@@ -73,4 +71,21 @@ public final class DebugUtils {
         }
     }
 
+    public static void printDetails(Grid grid) {
+        output.printf(Globals.PRINT_GRID_NAME, grid.getGridName());
+        output.printf(Globals.PRINT_NUM_OF_CELLS, grid.getNumberOfCells());
+
+    }
+
+    public static void printRun(int runNum) {
+        output.println("\n-------------------------: Run " + runNum + " \t:-------------------------\n");
+    }
+
+    public static void printOrthogonality(Cell cell, double average) {
+        output.println(String.format("Cell ID: %d\tCentre: (%.2f, %.2f, %.2f)\tAverage: %f", cell.getCellID(), cell.getCentre().x, cell.getCentre().y, cell.getCentre().z, average));
+    }
+
+    public static void printMessage(String message) {
+        output.println(message);
+    }
 }

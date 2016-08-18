@@ -27,6 +27,7 @@ public class Main {
         try {
             gridUtils = new GridUtils();
             grid = gridUtils.loadGrid();
+            DebugUtils.printDetails(grid);
         } catch(FileNotFoundException e) {
             System.out.println(Globals.ERROR_JSON_FILE);
             System.exit(1);
@@ -38,8 +39,10 @@ public class Main {
 
         DebugUtils.checkAndDump(grid, 0);
 
-        for(int i = 0; i < commander.getNumberOfRuns(); i++)
+        for(int i = 0; i < commander.getNumberOfRuns(); i++) {
+            DebugUtils.printRun(i+1);
             gridUtils.fixCells();
+        }
 
         DebugUtils.checkAndDump(grid, 2);
     }

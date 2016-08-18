@@ -174,10 +174,11 @@ public class Utils {
         Vector bestPosition;
         Vector currentPosition = cell.getCentre();
         Vector originalCentre = cell.getCentre().clone();
+        double currentBest = 0.0;
 
         while (step > Globals.INITIAL_STEP/stepSize) {
             boolean changed = false;
-            double currentBest = calculateAverageAngles(cell);
+            currentBest = calculateAverageAngles(cell);
             Vector[] positions = probablePositions(cell.getCentre(), step);
 
             for(Vector v : positions) {
@@ -200,6 +201,8 @@ public class Utils {
                 step /= 2;
             }
         }
+
+        DebugUtils.printOrthogonality(cell, currentBest);
 
         return cell.getCentre();
     }
