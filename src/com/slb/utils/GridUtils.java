@@ -25,9 +25,15 @@ public class GridUtils {
         return grid;
     }
 
-    public void fixCells() {
+    public double fixCells() {
+        double runCost = 0.0;
+
         for(int i = 0; i < grid.getNumberOfCells(); i++) {
-            utils.directSearch(grid.getCells().get(i));
+            runCost += utils.directSearch(grid.getCells().get(i));
         }
+
+        DebugUtils.printMessage(String.format("\nCost: %f", runCost));
+
+        return runCost;
     }
 }

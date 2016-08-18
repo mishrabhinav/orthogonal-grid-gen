@@ -167,7 +167,7 @@ public class Utils {
         return result;
     }
 
-    public Vector directSearch(Cell cell) {
+    public double directSearch(Cell cell) {
 
         double step = Globals.INITIAL_STEP;
         int stepSize = CommandUtils.getCommand().getStepSize();
@@ -204,6 +204,6 @@ public class Utils {
 
         DebugUtils.printOrthogonality(cell, currentBest);
 
-        return cell.getCentre();
+        return currentBest;
     }
 }

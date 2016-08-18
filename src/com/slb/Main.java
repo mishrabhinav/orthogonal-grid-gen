@@ -39,9 +39,24 @@ public class Main {
 
         DebugUtils.checkAndDump(grid, 0);
 
+        int runCounter = 0;
+        Double runCost = 0.0;
+        Double tempRunCost = 0.0;
+
         for(int i = 0; i < commander.getNumberOfRuns(); i++) {
             DebugUtils.printRun(i+1);
-            gridUtils.fixCells();
+            tempRunCost = gridUtils.fixCells();
+            if(tempRunCost.equals(runCost))
+                runCounter++;
+            else {
+                runCost = tempRunCost;
+                runCounter = 0;
+            }
+
+            if(runCounter == 10) {
+                DebugUtils.printMessage("\n*******Last 10 Runs have the same cost. Stopping future runs*******\n");
+                break;
+            }
         }
 
         DebugUtils.checkAndDump(grid, 2);
