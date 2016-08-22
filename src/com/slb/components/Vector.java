@@ -2,9 +2,6 @@ package com.slb.components;
 
 import com.slb.utils.Globals;
 
-/**
- * Created by AMishra12 on 22/07/2016.
- */
 public class Vector {
 
     public double x;

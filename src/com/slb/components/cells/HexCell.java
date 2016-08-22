@@ -1,6 +1,7 @@
 package com.slb.components.cells;
 
 import com.slb.components.Vector;
+import com.slb.utils.Globals;
 
 public class HexCell extends Cell {
 
@@ -62,7 +63,7 @@ public class HexCell extends Cell {
                 break;
 
             default:
-                System.out.println("BUG: Face number for a hex cell should be in range 0-5.");
+                System.out.println(Globals.BUG_FACE_NULL);
         }
 
         return vertices;

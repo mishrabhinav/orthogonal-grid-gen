@@ -1,6 +1,7 @@
 package com.slb.components.cells;
 
 import com.slb.components.Vector;
+import com.slb.utils.Globals;
 
 import java.util.ArrayList;
 
@@ -35,8 +36,7 @@ public class TdFCell extends Cell {
                     break;
             }
         } else {
-            System.out.println("ERRROR: Requested Face doesn't exist.");
-            System.exit(1);
+            System.out.println(Globals.BUG_FACE_NULL);
         }
 
         Vector[] face = faceVertices.toArray(new Vector[faceVertices.size()]);

@@ -17,9 +17,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Created by abhinavmishra on 01/08/2016.
- */
 public class GridParser {
 
     private Grid grid;
@@ -33,18 +30,18 @@ public class GridParser {
 
         String inputFile = CommandUtils.getCommand().getInputFile();
 
-        String jsonData = (new Scanner(new File(inputFile))).useDelimiter("\\Z").next();
+        String jsonData = (new Scanner(new File(inputFile))).useDelimiter(Globals.JSON_DELIM).next();
         gridObject = new JSONObject(jsonData);
         grid.setGridName(gridObject.getString(Globals.JSON_NAME));
-        grid.setGridType(gridObject.getInt("type"));
-        int cellLayers = grid.getGridType() == Globals.GRID_TYPE_HEX ? 1 : gridObject.getInt("layers");
+        grid.setGridType(gridObject.getInt(Globals.JSON_GRID_TYPE));
+        int cellLayers = grid.getGridType() == Globals.GRID_TYPE_HEX ? 1 : gridObject.getInt(Globals.JSON_GRID_LAYERS);
         grid.setNumberOfCells(gridObject.getJSONArray(Globals.JSON_CELLS).length() * cellLayers);
     }
 
     public void parseFile() throws JSONException {
 
         int gridType = gridObject.getInt(Globals.JSON_GRID_TYPE);
-        int cellLayers = gridType == Globals.GRID_TYPE_HEX ? 1 : gridObject.getInt("layers");
+        int cellLayers = gridType == Globals.GRID_TYPE_HEX ? 1 : gridObject.getInt(Globals.JSON_GRID_LAYERS);
 
         JSONArray cells = gridObject.getJSONArray(Globals.JSON_CELLS);
         int numberOfCells =  gridObject.getJSONArray(Globals.JSON_CELLS).length() * cellLayers;
@@ -56,7 +53,7 @@ public class GridParser {
                 grid.getCells().put(cellObject.getInt(Globals.JSON_CELL_ID), cell);
             }
          } else if(gridType == Globals.GRID_TYPE_2D5) {
-             int layerHeight = gridObject.getInt("layerHeight");
+             int layerHeight = gridObject.getInt(Globals.JSON_GRID_LAYER_HEIGHT);
             for(int i = 0; i < numberOfCells; i++) {
                 JSONObject cellObject = cells.getJSONObject(i % (numberOfCells / cellLayers));
                 Cell cell = init2D5Cell(cellObject, i, numberOfCells, cellLayers, layerHeight);

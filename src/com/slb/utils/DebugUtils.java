@@ -78,11 +78,14 @@ public final class DebugUtils {
     }
 
     public static void printRun(int runNum) {
-        output.println("\n-------------------------: Run " + runNum + " \t:-------------------------\n");
+        output.println(String.format(Globals.DEBUG_RUN_TITLE, runNum));
+        output.println(Globals.DEBUG_RUN_LINE);
+        output.println(Globals.DEBUG_RUN_TABLE_HEADER);
+        output.println(Globals.DEBUG_RUN_LINE);
     }
 
     public static void printOrthogonality(Cell cell, double average) {
-        output.println(String.format("Cell ID: %d\tCentre: (%.2f, %.2f, %.2f)\tAverage: %f", cell.getCellID(), cell.getCentre().x, cell.getCentre().y, cell.getCentre().z, average));
+        output.println(String.format(Globals.DEBUG_RUN_TABLE_ROW, cell.getCellID(), cell.getCentre().x, cell.getCentre().y, cell.getCentre().z, average));
     }
 
     public static void printMessage(String message) {

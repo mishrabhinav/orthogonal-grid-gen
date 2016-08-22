@@ -90,7 +90,7 @@ public class Utils {
                     neighbour.getCentre().y - cell.getCentre().y,
                     neighbour.getCentre().z - cell.getCentre().z);
         } else {
-            System.out.println("PARENT GRID NOT SUPPLIED. RETURNING NULL VECTOR.");
+            System.out.println(Globals.BUG_GRID_MISSING);
             return new Vector(0,0,0);
         }
     }
@@ -203,6 +203,7 @@ public class Utils {
         }
 
         DebugUtils.printOrthogonality(cell, currentBest);
+        DebugUtils.printMessage(Globals.DEBUG_RUN_LINE);
 
         return currentBest;
     }

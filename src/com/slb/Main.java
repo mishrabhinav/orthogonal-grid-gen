@@ -40,8 +40,9 @@ public class Main {
         DebugUtils.checkAndDump(grid, 0);
 
         int runCounter = 0;
-        Double runCost = 0.0;
-        Double tempRunCost = 0.0;
+        int runLimit = commander.getLimit();
+        double runCost = 0.0;
+        Double tempRunCost;
 
         for(int i = 0; i < commander.getNumberOfRuns(); i++) {
             DebugUtils.printRun(i+1);
@@ -53,8 +54,10 @@ public class Main {
                 runCounter = 0;
             }
 
-            if(runCounter == 10) {
-                DebugUtils.printMessage("\n*******Last 10 Runs have the same cost. Stopping future runs*******\n");
+            if(runCounter == runLimit) {
+                DebugUtils.printMessage(Globals.DEBUG_SECTION_LINE);
+                DebugUtils.printMessage(String.format(Globals.DEBUG_LIMIT_RUN, runLimit));
+                DebugUtils.printMessage(Globals.DEBUG_CANCEL_RUN);
                 break;
             }
         }

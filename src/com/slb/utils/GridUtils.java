@@ -32,7 +32,7 @@ public class GridUtils {
             runCost += utils.directSearch(grid.getCells().get(i));
         }
 
-        DebugUtils.printMessage(String.format("\nCost: %f", runCost));
+        DebugUtils.printMessage(String.format(Globals.PRINT_COST, runCost));
 
         return runCost;
     }

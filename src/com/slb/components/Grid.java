@@ -4,9 +4,6 @@ import com.slb.components.cells.Cell;
 
 import java.util.HashMap;
 
-/**
- * Created by AMishra12 on 22/07/2016.
- */
 public class Grid {
 
     private String gridName;

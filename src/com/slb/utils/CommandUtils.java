@@ -9,6 +9,7 @@ public class CommandUtils {
     private boolean dumpToSTDOut = false;
     private int numberOfRuns = 1;
     private int stepSize = 128;
+    private int limit = 10;
 
     private CommandUtils() {
 
@@ -26,12 +27,12 @@ public class CommandUtils {
                     if(inputFile == null) {
                         inputFile = args[index];
                     } else {
-                        System.out.println("WARNING: Unidentified argument '" + args[index] + "'.");
+                        System.out.println(String.format(Globals.WARNING_ILLEGAL_ARG, args[index]));
                     }
                     break;
                 case 2:
                     if(dumpToSTDOut) {
-                        System.out.println("WARNING: Cannot dump to both the file and STDOut. Giving priority to file.");
+                        System.out.println(Globals.COMMAND_DUMP_CONFLICT);
                         dumpToSTDOut = false;
                     }
                     dumpToFile = true;
@@ -39,7 +40,7 @@ public class CommandUtils {
                 case 3:
                     dumpToSTDOut = true;
                     if(dumpToFile) {
-                        System.out.println("WARNING: Cannot dump to both the file and STDOut. Giving priority to file.");
+                        System.out.println(Globals.COMMAND_DUMP_CONFLICT);
                         dumpToSTDOut = false;
                     }
                     break;
@@ -49,6 +50,9 @@ public class CommandUtils {
                 case 5:
                     stepSize = Integer.parseInt(args[++index]);
                     break;
+                case 6:
+                    limit = Integer.parseInt(args[++index]);
+                    break;
             }
 
             index++;
@@ -56,14 +60,16 @@ public class CommandUtils {
     }
 
     private int classifyArg(String arg) {
-        if(arg.equals("-gf")) {
+        if(arg.equals(Globals.COMMAND_DUMP_FILE)) {
             return 2;
-        } else if(arg.equals("-gs")) {
+        } else if(arg.equals(Globals.COMMAND_DUMP_STDOUT)) {
             return 3;
-        } else if(arg.equals("-runs")) {
+        } else if(arg.equals(Globals.COMMAND_RUNS)) {
             return 4;
-        } else if(arg.equals("-step")) {
+        } else if(arg.equals(Globals.COMMAND_STEP)) {
             return 5;
+        } else if(arg.equals(Globals.COMMAND_LIMIT)) {
+            return 6;
         } else {
             return 1;
         }
@@ -71,7 +77,7 @@ public class CommandUtils {
 
     public static CommandUtils getCommand() {
         if(command == null) {
-            System.out.println("WARNING: Setup CommandUtils before using it.");
+            System.out.println(Globals.WARNING_SETUP_COMMANDUTIL);
             return command;
         } else {
             return command;
@@ -104,5 +110,9 @@ public class CommandUtils {
 
     public int getStepSize() {
         return stepSize;
+    }
+
+    public int getLimit() {
+        return limit;
     }
 }
