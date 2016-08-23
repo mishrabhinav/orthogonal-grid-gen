@@ -5,6 +5,15 @@ public final class Globals {
     public static final double INITIAL_STEP                    = 2.0;
     public static final int    GRID_TYPE_HEX                   = 0;
     public static final int    GRID_TYPE_2D5                   = 1;
+    public static final int    STAGE_START                     = 0;
+    public static final int    STAGE_END                       = 2;
+
+    public static final int    ARG_INPUT_FILE                  = 1;
+    public static final int    ARG_DUMP_FILE                   = 2;
+    public static final int    ARG_DUMP_STDOUT                 = 3;
+    public static final int    ARG_NUM_RUNS                    = 4;
+    public static final int    ARG_STEP_SIZE                   = 5;
+    public static final int    ARG_RUN_LIMIT                   = 6;
 
     public static final String JSON_DELIM                      = "\\Z";
     public static final String JSON_NAME                       = "name";
@@ -22,6 +31,9 @@ public final class Globals {
     public static final String JSON_VERTEX_Y                   = "y";
     public static final String JSON_VERTEX_Z                   = "z";
 
+    public static final String INFO_INITIAL_STATE              = "\nINFO: Initial grid state.";
+    public static final String INFO_FINAL_STATE                = "\nINFO: Final grid state.";
+    public static final String INFO_START_OPT                  = "\nINFO: Starting the optimization runs.";
     public static final String WARNING_DUMP_FAIL               = "WARNING: Dump setup failed. Data will not be dumped.";
     public static final String WARNING_ILLEGAL_ARG             = "WARNING: Unidentified argument '%s'.";
     public static final String WARNING_SETUP_COMMANDUTIL       = "WARNING: Setup CommandUtils before using it.";

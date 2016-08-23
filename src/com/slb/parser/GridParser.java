@@ -19,18 +19,19 @@ import java.util.Scanner;
 
 public class GridParser {
 
-    private Grid grid;
+    private Grid       grid;
     private JSONObject gridObject;
 
     public GridParser(Grid grid) {
+
         this.grid = grid;
     }
 
     public void loadFile() throws JSONException, FileNotFoundException {
 
         String inputFile = CommandUtils.getCommand().getInputFile();
+        String jsonData  = (new Scanner(new File(inputFile))).useDelimiter(Globals.JSON_DELIM).next();
 
-        String jsonData = (new Scanner(new File(inputFile))).useDelimiter(Globals.JSON_DELIM).next();
         gridObject = new JSONObject(jsonData);
         grid.setGridName(gridObject.getString(Globals.JSON_NAME));
         grid.setGridType(gridObject.getInt(Globals.JSON_GRID_TYPE));
@@ -40,23 +41,24 @@ public class GridParser {
 
     public void parseFile() throws JSONException {
 
-        int gridType = gridObject.getInt(Globals.JSON_GRID_TYPE);
-        int cellLayers = gridType == Globals.GRID_TYPE_HEX ? 1 : gridObject.getInt(Globals.JSON_GRID_LAYERS);
-
-        JSONArray cells = gridObject.getJSONArray(Globals.JSON_CELLS);
-        int numberOfCells =  gridObject.getJSONArray(Globals.JSON_CELLS).length() * cellLayers;
+        int        gridType      = gridObject.getInt(Globals.JSON_GRID_TYPE);
+        int        cellLayers    = gridType == Globals.GRID_TYPE_HEX ? 1 : gridObject.getInt(Globals.JSON_GRID_LAYERS);
+        JSONArray  cells         = gridObject.getJSONArray(Globals.JSON_CELLS);
+        int        numberOfCells =  gridObject.getJSONArray(Globals.JSON_CELLS).length() * cellLayers;
+        JSONObject cellObject;
+        Cell       cell;
 
         if(gridType == Globals.GRID_TYPE_HEX) {
             for(int i = 0; i < numberOfCells; i++) {
-                JSONObject cellObject = cells.getJSONObject(i);
-                Cell cell = initHexCell(cellObject, i);
+                cellObject = cells.getJSONObject(i);
+                cell = initHexCell(cellObject, i);
                 grid.getCells().put(cellObject.getInt(Globals.JSON_CELL_ID), cell);
             }
          } else if(gridType == Globals.GRID_TYPE_2D5) {
              int layerHeight = gridObject.getInt(Globals.JSON_GRID_LAYER_HEIGHT);
             for(int i = 0; i < numberOfCells; i++) {
-                JSONObject cellObject = cells.getJSONObject(i % (numberOfCells / cellLayers));
-                Cell cell = init2D5Cell(cellObject, i, numberOfCells, cellLayers, layerHeight);
+                cellObject = cells.getJSONObject(i % (numberOfCells / cellLayers));
+                cell = init2D5Cell(cellObject, i, numberOfCells, cellLayers, layerHeight);
                 grid.getCells().put(i , cell);
             }
          } else {
@@ -66,19 +68,20 @@ public class GridParser {
     }
 
     private Cell initHexCell(JSONObject cellObject, int cellID) throws JSONException {
-        JSONObject cellCentre = cellObject.getJSONObject(Globals.JSON_CELL_CENTRE);
-        JSONArray cellVertices = cellObject.getJSONArray(Globals.JSON_CELL_VERTICES);
-        int numberOfVertices = cellVertices.length();
+        JSONObject cellCentre       = cellObject.getJSONObject(Globals.JSON_CELL_CENTRE);
+        JSONArray  cellVertices     = cellObject.getJSONArray(Globals.JSON_CELL_VERTICES);
+        int        numberOfVertices = cellVertices.length();
 
         Cell cell = new HexCell(cellID, new Vector(cellCentre.getDouble(Globals.JSON_VERTEX_X),
                         cellCentre.getDouble(Globals.JSON_VERTEX_Y),
                         cellCentre.getDouble(Globals.JSON_VERTEX_Z)));
 
-        ArrayList<Vector> vertices = cell.getVertices();
+        ArrayList<Vector>  vertices   = cell.getVertices();
         ArrayList<Integer> neighbours = cell.getNeighbours();
+        JSONObject         vertex;
 
         for(int j = 0; j < numberOfVertices; j++) {
-            JSONObject vertex = cellVertices.getJSONObject(j);
+            vertex = cellVertices.getJSONObject(j);
             vertices.add(j, new Vector(vertex.getDouble(Globals.JSON_VERTEX_X),
                                        vertex.getDouble(Globals.JSON_VERTEX_Y),
                                        vertex.getDouble(Globals.JSON_VERTEX_Z)));
@@ -93,18 +96,19 @@ public class GridParser {
 
     private Cell init2D5Cell(JSONObject cellObject, int cellCount, int numCells, int layers, double layerHeight) throws JSONException {
 
-        Cell cell = new TdFCell(cellCount);
-        JSONArray cellVertices = cellObject.getJSONArray(Globals.JSON_CELL_VERTICES);
-        int numberOfVertices = cellVertices.length();
-        int currentLayer = cellCount / (numCells / layers);
-
-        ArrayList<Vector> vertices = cell.getVertices();
-        ArrayList<Integer> neighbours = cell.getNeighbours();
+        Cell               cell             = new TdFCell(cellCount);
+        JSONArray          cellVertices     = cellObject.getJSONArray(Globals.JSON_CELL_VERTICES);
+        int                numberOfVertices = cellVertices.length();
+        int                currentLayer     = cellCount / (numCells / layers);
+        int                offset           = 0;
+        ArrayList<Vector>  vertices         = cell.getVertices();
+        ArrayList<Integer> neighbours       = cell.getNeighbours();
+        JSONObject         vertex;
 
 
         for(int i = 0; i < 2 * numberOfVertices; i++) {
-            int offset = currentLayer + (i >= numberOfVertices ? 1 : 0);
-            JSONObject vertex = cellVertices.getJSONObject(i % numberOfVertices);
+            offset = currentLayer + (i >= numberOfVertices ? 1 : 0);
+            vertex = cellVertices.getJSONObject(i % numberOfVertices);
             vertices.add(i, new Vector(vertex.getDouble(Globals.JSON_VERTEX_X),
                                        vertex.getDouble(Globals.JSON_VERTEX_Y),
                                        vertex.getDouble(Globals.JSON_VERTEX_Z) - offset * layerHeight));

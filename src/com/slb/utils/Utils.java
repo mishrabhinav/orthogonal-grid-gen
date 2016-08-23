@@ -6,14 +6,16 @@ import com.slb.components.Vector;
 
 public class Utils {
 
-    private Grid parentGrid;
+    private Grid    parentGrid;
     private boolean gridSupplied;
 
     public Utils() {
-       this.gridSupplied = false;
+
+        this.gridSupplied = false;
     }
 
     public Utils(Grid parentGrid) {
+
         this.parentGrid = parentGrid;
         this.gridSupplied = true;
     }
@@ -66,7 +68,6 @@ public class Utils {
         double val_b = valueWithPlane(faceVertices[0], faceVertices[1], faceVertices[2], b);
 
         return (val_a < 0 && val_b < 0) || (val_a > 0 && val_b > 0) || (val_a == 0 && val_b == 0);
-
     }
 
     public boolean insideCell(Cell cell, Vector v) {
@@ -110,10 +111,6 @@ public class Utils {
 
         Vector result = A.cross(B);
 
-        //System.out.println("A: " + A.x + ", " + A.y + ", " + A.z);
-        //System.out.println("B: " + B.x + ", " + B.y + ", " + B.z);
-        //System.out.println(result.x + ", " + result.y + ", " + result.z + ", Face: " + faceNum);
-
         if (vertices.length == 3 || valueWithPlane(vertices[0], vertices[1], vertices[2], vertices[3]) == 0)
             return result;
 
@@ -131,6 +128,7 @@ public class Utils {
     }
 
     public double angleBetweenVectors(Vector A, Vector B) {
+
         return Math.acos(A.dot(B)/(A.magnitude() * B.magnitude()));
     }
 
@@ -169,21 +167,23 @@ public class Utils {
 
     public double directSearch(Cell cell) {
 
-        double step = Globals.INITIAL_STEP;
-        int stepSize = CommandUtils.getCommand().getStepSize();
-        Vector bestPosition;
-        Vector currentPosition = cell.getCentre();
-        Vector originalCentre = cell.getCentre().clone();
-        double currentBest = 0.0;
+        double  step            = Globals.INITIAL_STEP;
+        int     stepSize        = CommandUtils.getCommand().getStepSize();
+        Vector  currentPosition = cell.getCentre();
+        Vector  originalCentre  = cell.getCentre().clone();
+        double  currentBest     = 0.0;
+        double  probableBest;
+        Vector  bestPosition;
+        boolean changed;
 
         while (step > Globals.INITIAL_STEP/stepSize) {
-            boolean changed = false;
+            changed = false;
             currentBest = calculateAverageAngles(cell);
             Vector[] positions = probablePositions(cell.getCentre(), step);
 
             for(Vector v : positions) {
                 cell.setCentre(v);
-                double probableBest = calculateAverageAngles(cell);
+                probableBest = calculateAverageAngles(cell);
 
                 if (probableBest < currentBest) {
                     currentPosition = v;

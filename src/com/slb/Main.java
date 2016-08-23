@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 public class Main {
 
     private static GridUtils gridUtils;
-    private static Grid grid;
+    private static Grid      grid;
 
     public static void main(String[] args) {
 
@@ -39,10 +39,12 @@ public class Main {
 
         DebugUtils.checkAndDump(grid, 0);
 
-        int runCounter = 0;
-        int runLimit = commander.getLimit();
-        double runCost = 0.0;
+        int    runCounter  = 0;
+        int    runLimit    = commander.getLimit();
+        double runCost     = 0.0;
         Double tempRunCost;
+
+        DebugUtils.printMessage(Globals.INFO_START_OPT);
 
         for(int i = 0; i < commander.getNumberOfRuns(); i++) {
             DebugUtils.printRun(i+1);

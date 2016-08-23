@@ -6,13 +6,13 @@ import com.slb.utils.Globals;
 public class HexCell extends Cell {
 
     public HexCell(int cellID, Vector centre){
-       super(cellID, centre);
+
+        super(cellID, centre);
     }
 
     @Override
     public Vector[] getFace(int faceNum) {
 
-        // NOTE: Face and Vector ordering is different in Intersect.
         Vector[] vertices = new Vector[4];
 
         switch (faceNum) {

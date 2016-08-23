@@ -7,14 +7,15 @@ import java.util.ArrayList;
 
 public abstract class Cell {
 
-    protected int cellID;
-    protected Vector centre;
-    public Vector pointInside;
-    protected ArrayList<Vector> vertices;
+    protected int                cellID;
+    protected Vector             centre;
+    protected ArrayList<Vector>  vertices;
     protected ArrayList<Integer> neighbours;
-    protected int validNeighbours;
+    protected int                validNeighbours;
+    public    Vector             pointInside;
 
     public Cell(int cellID, Vector centre){
+
         this.cellID = cellID;
         this.centre = centre;
         this.vertices = new ArrayList<>();
@@ -26,30 +27,37 @@ public abstract class Cell {
     }
 
     public int getCellID() {
+
         return cellID;
     }
 
     public Vector getCentre() {
+
         return centre;
     }
 
     public void setCentre(Vector centre) {
+
         this.centre = centre;
     }
 
     public void setPointInside(Vector v) {
+
         this.pointInside = v.clone();
     }
 
     public ArrayList<Vector> getVertices() {
+
         return vertices;
     }
 
     public ArrayList<Integer> getNeighbours() {
+
         return neighbours;
     }
 
     public int getValidNeighbours() {
+
         if(validNeighbours == 0) {
             for (int n : neighbours)
                 validNeighbours += n != -1 ? 1 : 0;
@@ -62,6 +70,7 @@ public abstract class Cell {
 
     @Override
     public String toString() {
+
         return String.format(Globals.PRINT_CELL, cellID, centre.toString());
     }
 }

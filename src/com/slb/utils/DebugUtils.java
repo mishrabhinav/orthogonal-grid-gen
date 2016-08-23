@@ -14,6 +14,7 @@ public final class DebugUtils {
     private static PrintStream output;
 
     public static void setupDebugUtils() throws FileNotFoundException {
+
         CommandUtils commander = CommandUtils.getCommand();
 
             if(commander.isDumpToFile())
@@ -23,19 +24,27 @@ public final class DebugUtils {
 
             if(output == null)
                 System.out.println(Globals.DEBUG_SETUP_ERROR);
-
     }
 
     public static void checkAndDump(Grid grid, int stage) {
+
+        if(stage == Globals.STAGE_START) {
+            output.println(Globals.INFO_INITIAL_STATE);
+        } else if(stage == Globals.STAGE_END) {
+            output.println(Globals.INFO_FINAL_STATE);
+        }
+
         if(output != null)
             printGrid(grid);
     }
 
     private static void printVector(Vector v, String vectorName) {
+
         output.printf(Globals.PRINT_VECTOR_NAME, vectorName, v.toString());
     }
 
     private static void printVertices(ArrayList<Vector> vertices, int length) {
+
         output.println();
         for(int i = 0; i < length; i++) {
             printVector(vertices.get(i), String.format(Globals.PRINT_VERTEX_NAME, i));
@@ -43,6 +52,7 @@ public final class DebugUtils {
     }
 
     private static void printNeighbours(ArrayList<Integer> neighbours, int length) {
+
         output.println();
         for(int i = 0; i < length; i++) {
             if(neighbours.get(i) != -1)
@@ -53,6 +63,7 @@ public final class DebugUtils {
     }
 
     private static void printCell(Cell cell) {
+
         output.printf(Globals.PRINT_CELL_ID, cell.getCellID());
         printVector(cell.getCentre(), Globals.PRINT_CENTER);
         printVertices(cell.getVertices(), cell.getVertices().size());
@@ -72,12 +83,13 @@ public final class DebugUtils {
     }
 
     public static void printDetails(Grid grid) {
+
         output.printf(Globals.PRINT_GRID_NAME, grid.getGridName());
         output.printf(Globals.PRINT_NUM_OF_CELLS, grid.getNumberOfCells());
-
     }
 
     public static void printRun(int runNum) {
+
         output.println(String.format(Globals.DEBUG_RUN_TITLE, runNum));
         output.println(Globals.DEBUG_RUN_LINE);
         output.println(Globals.DEBUG_RUN_TABLE_HEADER);
@@ -85,10 +97,13 @@ public final class DebugUtils {
     }
 
     public static void printOrthogonality(Cell cell, double average) {
-        output.println(String.format(Globals.DEBUG_RUN_TABLE_ROW, cell.getCellID(), cell.getCentre().x, cell.getCentre().y, cell.getCentre().z, average));
+
+        output.println(String.format(Globals.DEBUG_RUN_TABLE_ROW, cell.getCellID(),
+                                        cell.getCentre().x, cell.getCentre().y, cell.getCentre().z, average));
     }
 
     public static void printMessage(String message) {
+
         output.println(message);
     }
 }
