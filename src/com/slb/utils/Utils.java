@@ -4,6 +4,8 @@ import com.slb.components.cells.Cell;
 import com.slb.components.Grid;
 import com.slb.components.Vector;
 
+import java.util.ArrayList;
+
 public class Utils {
 
     private Grid    parentGrid;
@@ -147,22 +149,41 @@ public class Utils {
         return sum_theta / (double)cell.getValidNeighbours();
     }
 
-    private Vector[] probablePositions(Vector centre, double step) {
+    private Vector[] probablePositions(Cell cell, double step) {
 
-        Vector[] result = new Vector[6];
+        ArrayList<Vector> result = new ArrayList<>();
+        Vector centre = cell.getCentre();
+        Vector probable;
 
         step = Math.abs(step);
 
-        result[0] = centre.clone().add(step, 0, 0);
-        result[1] = centre.clone().subtract(step, 0, 0);
+        probable = centre.clone().add(step, 0, 0);
+        if(insideCell(cell, probable))
+            result.add(probable);
 
-        result[2] = centre.clone().add(0, step, 0);
-        result[3] = centre.clone().subtract(0, step, 0);
+        probable = centre.clone().subtract(step, 0, 0);
+        if(insideCell(cell, probable))
+            result.add(probable);
 
-        result[4] = centre.clone().add(0, 0, step);
-        result[5] = centre.clone().subtract(0, 0, step);
+        probable = centre.clone().add(0, step, 0);
+        if(insideCell(cell, probable))
+            result.add(probable);
 
-        return result;
+        probable = centre.clone().subtract(0, step, 0);
+        if(insideCell(cell, probable))
+            result.add(probable);
+
+        probable = centre.clone().add(0, 0, step);
+        if(insideCell(cell, probable))
+            result.add(probable);
+
+        probable = centre.clone().subtract(0, 0, step);
+        if(insideCell(cell, probable))
+            result.add(probable);
+
+        Vector[] resultArray = result.toArray(new Vector[result.size()]);
+
+        return resultArray;
     }
 
     public double directSearch(Cell cell) {
@@ -179,7 +200,7 @@ public class Utils {
         while (step > Globals.INITIAL_STEP/stepSize) {
             changed = false;
             currentBest = calculateAverageAngles(cell);
-            Vector[] positions = probablePositions(cell.getCentre(), step);
+            Vector[] positions = probablePositions(cell, step);
 
             for(Vector v : positions) {
                 cell.setCentre(v);
@@ -192,7 +213,7 @@ public class Utils {
                 }
             }
 
-            if (changed && insideCell(cell, currentPosition)) {
+            if (changed) {
                 bestPosition = currentPosition;
                 cell.setCentre(bestPosition);
                 originalCentre = currentPosition;
